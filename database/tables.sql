@@ -106,7 +106,7 @@ CREATE TABLE CANDIDATO (
 CREATE TABLE FORMULA (
     id_papeleta INT,
     id_ballotage INT,
-    cc_candidato VARCHAR(8),
+    cc_candidato VARCHAR(8) UNIQUE,
     PRIMARY KEY (id_papeleta),
     FOREIGN KEY (id_papeleta) REFERENCES PAPELETA(ID),
     FOREIGN KEY (id_ballotage) REFERENCES BALLOTAGE(id_eleccion),
@@ -203,11 +203,11 @@ CREATE TABLE VOCAL (
 
 CREATE TABLE MESA (
     ID INT AUTO_INCREMENT,
-    numero_circuito INT,
-    id_eleccion INT,
-    CC_presidente VARCHAR(8),
-    CC_secretario VARCHAR(8),
-    CC_vocal VARCHAR(8),
+    numero_circuito INT UNIQUE,
+    id_eleccion INT UNIQUE,
+    CC_presidente VARCHAR(8) UNIQUE,
+    CC_secretario VARCHAR(8) UNIQUE,
+    CC_vocal VARCHAR(8) UNIQUE,
     PRIMARY KEY (ID),
     FOREIGN KEY (numero_circuito, id_eleccion) REFERENCES CIRCUITO_ELECCION(numero_circuito, id_eleccion),
     FOREIGN KEY (CC_presidente) REFERENCES PRESIDENTE(CC_miembro_mesa),
