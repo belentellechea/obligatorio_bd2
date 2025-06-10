@@ -1,5 +1,3 @@
-USE database_obligatorio;
-
 DELIMITER //
 
 CREATE TRIGGER lista_unica_eleccion_nacional
@@ -31,7 +29,7 @@ BEGIN
     SELECT COUNT(*) INTO numero_existente
     FROM LISTA_MUNICIPAL_DEPARTAMENTAL LMD
     JOIN LISTA L ON LMD.id_lista = L.id_papeleta
-    WHERE LMD.id_eleccion_muncipal_departamental = NEW.id_eleccion_municipal_departamental
+    WHERE LMD.id_eleccion_municipal_departamental = NEW.id_eleccion_municipal_departamental
       AND L.numero = (SELECT numero FROM LISTA WHERE id_papeleta = NEW.id_lista);
 
     IF numero_existente > 0 THEN

@@ -1,8 +1,3 @@
-DROP DATABASE IF EXISTS database_obligatorio;
-
-CREATE DATABASE database_obligatorio DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
-
-USE database_obligatorio;
 
 CREATE TABLE ELECCION (
     ID INT AUTO_INCREMENT PRIMARY KEY,
