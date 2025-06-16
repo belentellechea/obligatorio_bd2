@@ -162,23 +162,35 @@ CREATE TABLE POLICIA (
     FOREIGN KEY (id_establecimiento) REFERENCES ESTABLECIMIENTO(ID)
 );
 
-CREATE TABLE VOTANTE (
+CREATE TABLE VOTANTE(
     CC_persona VARCHAR(8),
-    confirmacion_voto INT,
     numero_circuito_esperado INT,
-    numero_circuito_votacion INT,
     id_eleccion INT,
-    PRIMARY KEY (CC_persona, confirmacion_voto),
+    PRIMARY KEY (CC_persona),
     FOREIGN KEY (CC_persona) REFERENCES PERSONA(CC),
     FOREIGN KEY (numero_circuito_esperado) REFERENCES CIRCUITO_ELECCION(numero_circuito),
-    FOREIGN KEY (numero_circuito_votacion) REFERENCES CIRCUITO_ELECCION(numero_circuito),
     FOREIGN KEY (id_eleccion) REFERENCES CIRCUITO_ELECCION(id_eleccion)
+);
+
+CREATE TABLE VOTANTE_VOTA (
+    ID INT,
+    CC_votante VARCHAR(8),
+    numero_circuito INT,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (CC_votante) REFERENCES VOTANTE(CC_persona),
+    FOREIGN KEY (numero_circuito) REFERENCES CIRCUITO_ELECCION(numero_circuito)
 );
 
 CREATE TABLE MIEMBRO_MESA (
     CC_persona VARCHAR(8) PRIMARY KEY,
     organismo VARCHAR(50),
     FOREIGN KEY (CC_persona) REFERENCES PERSONA(CC)
+);
+
+CREATE TABLE USUARIO (
+    contrasenia VARCHAR(30) NOT NULL,
+    CC_mimebro_mesa VARCHAR(8) PRIMARY KEY UNIQUE NOT NULL,
+    FOREIGN KEY (CC_mimebro_mesa) REFERENCES  MIEMBRO_MESA(CC_persona)
 );
 
 CREATE TABLE PRESIDENTE (
