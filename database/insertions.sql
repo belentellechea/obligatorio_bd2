@@ -92,7 +92,7 @@ INSERT INTO CIRCUITO (numero, accesible, inicio_rango_cc_habilitadas, fin_rango_
 (16, FALSE,'TAA0000', 'TZZ9999', 20),
 (17, TRUE, 'UAA0000', 'UZZ9999', 21),
 (18, FALSE,'VAA0000', 'VZZ9999', 22),
-(19, TRUE, 'YAA0000', 'ZZZ9999', 22);
+(19, TRUE, 'WAA0000', 'ZZZ9999', 22);
 
 INSERT INTO CIRCUITO_ELECCION(id_eleccion, numero_circuito) VALUES
 (1,1),
