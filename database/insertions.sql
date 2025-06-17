@@ -205,7 +205,7 @@ INSERT INTO PERSONA(CC, CI, nombre, apellido, fecha_nacimiento) VALUES
 ('CMM2345', '41345678', 'Andrés', 'Ojeda',    '1970-03-15'),
 ('SFU6789', '42987654', 'Robert', 'Silva',    '1971-05-10'),
 ('MBE3456', '38561234', 'Guido',   'Manini',   '1958-06-17'),
-('JKL9876', '42034567', 'Lorena',  'Quintana', '1975-01-05');
+('JKL9877', '42034567', 'Lorena',  'Quintana', '1975-01-05');
 
 INSERT INTO COMISARIA(id_dpto, direccion) VALUES
 (1, 'Av. Lecueder 123'),
@@ -257,7 +257,7 @@ INSERT INTO CANDIDATO (cc_persona, id_partido_politico, anio) VALUES
 ('CMM2345',3,2024),
 ('SFU6789',3,2024),
 ('MBE3456',4,2019),
-('JKL9876',4,2024);
+('JKL9877',4,2024);
 
 INSERT INTO CANDIDATO_LISTA(cc_candidato, id_lista, orden, organo) VALUES
 ('FHI4321',1,1,'presidencia'),
@@ -281,9 +281,9 @@ INSERT INTO CANDIDATO_LISTA(cc_candidato, id_lista, orden, organo) VALUES
 ('MBE3456',10,1,'presidencia'),
 ('MBE3456',11,1,'presidencia'),
 ('MBE3456',12,1,'presidencia'),
-('JKL9876',10,2,'vicepresidencia'),
-('JKL9876',11,2,'vicepresidencia'),
-('JKL9876',12,2,'vicepresidencia');
+('JKL9877',10,2,'vicepresidencia'),
+('JKL9877',11,2,'vicepresidencia'),
+('JKL9877',12,2,'vicepresidencia');
 
 INSERT INTO VOTANTE (CC_persona, id_eleccion) VALUES
 ('BCA3564', 1),
@@ -328,7 +328,7 @@ INSERT INTO VOTANTE (CC_persona, id_eleccion) VALUES
   ('CMM2345', 1),
   ('SFU6789', 1),
   ('MBE3456', 1),
-  ('JKL9876', 1);
+  ('JKL9877', 1);
 
 INSERT INTO MIEMBRO_MESA(CC_persona, organismo) VALUES
 ('QWE6781','Ministerio del Interior'),
@@ -380,5 +380,5 @@ INSERT INTO MESA(numero_circuito, id_eleccion, CC_presidente, CC_secretario, CC_
 (1,1,'QWE6781','FGH3452','CVB8321'),
 (2,1,'ZXC3219','BNM7612','QAZ9631'),
 (3,1,'ASD9870','YUI5623','WSX8520'),
-(4,1,'XCV0741','HJK7634','EDC7418'); 
+(4,1,'XCV0741','HJK7634','EDC7418');
 
