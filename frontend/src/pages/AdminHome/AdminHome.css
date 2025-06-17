@@ -1,0 +1,22 @@
+.buttonsContainer.AdminHome {
+  display: flex;
+  flex-direction: row;
+}
+
+.voteButton.disabledButton {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(33, 47, 84, 0.05);
+
+  t {
+    color: white;
+    opacity: 50%;
+  }
+  img {
+    filter: brightness(100);
+    opacity: 50%;
+  }
+}
+
+.buttonsContainer.AdminHome button {
+  width: 240px;
+}
