@@ -74,25 +74,25 @@ INSERT INTO ESTABLECIMIENTO (id_lugar, direccion, tipo) VALUES
 (22, 'Tacuarembó Plaza 19 de Abril', 'liceo');
 
 INSERT INTO CIRCUITO (numero, accesible, inicio_rango_cc_habilitadas, fin_rango_cc_habilitadas, id_establecimiento) VALUES
-(1, TRUE,  'ART0000', 'ART9999',  8),
-(2, FALSE, 'CAN0000', 'CAN9999',  4),
-(3, TRUE,  'CER0000', 'CER9999',  9),
-(4, FALSE, 'COL0000', 'COL9999', 10),
-(5, TRUE,  'DUR0000', 'DUR9999', 11),
-(6, FALSE, 'FLO0000', 'FLO9999', 12),
-(7, TRUE,  'FLA0000', 'FLA9999', 13),
-(8, FALSE, 'LAV0000', 'LAV9999', 14),
-(9, TRUE,  'MAL0000', 'MAL9999',  6),
-(10, FALSE,'MON0000', 'MON9999',  1),
-(11, TRUE, 'PAY0000', 'PAY9999', 15),
-(12, FALSE,'RIN0000', 'RIN9999', 16),
-(13, TRUE, 'RIV0000', 'RIV9999', 17),
-(14, FALSE,'ROC0000', 'ROC9999', 18),
-(15, TRUE, 'SAL0000', 'SAL9999', 19),
-(16, FALSE,'SJO0000', 'SJO9999', 20),
-(17, TRUE, 'SOR0000', 'SOR9999', 21),
-(18, FALSE,'TAC0000', 'TAC9999', 22),
-(19, TRUE, 'TRE0000', 'TRE9999', 22);
+(1, TRUE,  'AAA0000', 'AZZ9999',  8),
+(2, FALSE, 'BAA0000', 'BZZ9999',  4),
+(3, TRUE,  'CAA0000', 'CZZ9999',  9),
+(4, FALSE, 'DAA0000', 'DZZ9999', 10),
+(5, TRUE,  'EAA0000', 'EZZ9999', 11),
+(6, FALSE, 'FAA0000', 'FZZ9999', 12),
+(7, TRUE,  'GAA0000', 'GZZ9999', 13),
+(8, FALSE, 'HAA0000', 'HZZ9999', 14),
+(9, TRUE,  'IAA0000', 'IZZ9999',  6),
+(10, FALSE,'JAA0000', 'JZZ9999',  1),
+(11, TRUE, 'KAA0000', 'KZZ9999', 15),
+(12, FALSE,'LAA0000', 'LZZ9999', 16),
+(13, TRUE, 'MAA0000', 'OZZ9999', 17),
+(14, FALSE,'PAA0000', 'RZZ9999', 18),
+(15, TRUE, 'SAA0000', 'SZZ9999', 19),
+(16, FALSE,'TAA0000', 'TZZ9999', 20),
+(17, TRUE, 'UAA0000', 'UZZ9999', 21),
+(18, FALSE,'VAA0000', 'VZZ9999', 22),
+(19, TRUE, 'YAA0000', 'ZZZ9999', 22);
 
 INSERT INTO CIRCUITO_ELECCION(id_eleccion, numero_circuito) VALUES
 (1,1),
@@ -285,5 +285,100 @@ INSERT INTO CANDIDATO_LISTA(cc_candidato, id_lista, orden, organo) VALUES
 ('JKL9876',11,2,'vicepresidencia'),
 ('JKL9876',12,2,'vicepresidencia');
 
+INSERT INTO VOTANTE (CC_persona, id_eleccion) VALUES
+('BCA3564', 1),
+  ('KLM4578', 1),
+  ('XYZ1234', 1),
+  ('PQR9845', 1),
+  ('DEF3456', 1),
+  ('LMN4567', 1),
+  ('GHI6789', 1),
+  ('UVW2345', 1),
+  ('JKL9876', 1),
+  ('MNO1235', 1),
+  ('RST6543', 1),
+  ('TUV4321', 1),
+  ('QWE6781', 1),
+  ('ZXC3219', 1),
+  ('ASD9870', 1),
+  ('FGH3452', 1),
+  ('BNM7612', 1),
+  ('YUI5623', 1),
+  ('HJK7634', 1),
+  ('CVB8321', 1),
+  ('QAZ9631', 1),
+  ('WSX8520', 1),
+  ('EDC7418', 1),
+  ('RFV6309', 1),
+  ('TGB5297', 1),
+  ('YHN4186', 1),
+  ('UJM3074', 1),
+  ('IKL2963', 1),
+  ('OLP1652', 1),
+  ('XCV0741', 1),
+  ('MLK5823', 1),
+  ('ZXC4712', 1),
+  ('BNM3601', 1),
+  ('POI2490', 1),
+  ('LKJ1388', 1),
+  ('BMC1234', 1),
+  ('ACJ5678', 1),
+  ('FHI4321', 1),
+  ('BME8765', 1),
+  ('CMM2345', 1),
+  ('SFU6789', 1),
+  ('MBE3456', 1),
+  ('JKL9876', 1);
 
+INSERT INTO MIEMBRO_MESA(CC_persona, organismo) VALUES
+('QWE6781','Ministerio del Interior'),
+('ZXC3219','Ministerio de Defensa Nacional'),
+('ASD9870','Ministerio de Salud Pública'),
+('XCV0741','Ministerio de Trabajo y Seguridad Social'),
+('FGH3452','Ministerio del Interior'),
+('BNM7612','Asamblea General'),
+('YUI5623','Asamblea General'),
+('HJK7634', 'Asamblea General'),
+('CVB8321','Asamblea General'),
+('QAZ9631','Ministerio de Educación y Cultura'),
+('WSX8520','Ministerio de Salud Pública'),
+('EDC7418','Ministerio de Defensa Nacional');
+
+INSERT INTO USUARIO (contrasenia, CC_mimebro_mesa) VALUES
+('fG7#Lp9TqX2!', 'QWE6781'),
+  ('Km9&TrE5bQ1$', 'ZXC3219'),
+  ('hN4*AsD8pL0?', 'ASD9870'),
+  ('Yt6@UvR3zX7%', 'FGH3452'),
+  ('Po0#WeR5xC2&', 'BNM7612'),
+  ('Qz8*JkL4mN1!', 'YUI5623'),
+  ('Rt7&YvG2bN5$', 'HJK7634'),
+  ('Mn3#BcV9kL6@', 'CVB8321'),
+  ('Ui4*OpE7rT8?', 'QAZ9631'),
+  ('Xy5$ZaQ2wS3%', 'WSX8520'),
+  ('Df9&GhJ1kL7!', 'EDC7418'),
+  ('Gk4$PmF8#Qw2', 'XCV0741');
+
+INSERT INTO PRESIDENTE(CC_miembro_mesa) VALUES
+('QWE6781'),
+('ZXC3219'),
+('ASD9870'),
+('XCV0741');
+
+INSERT INTO SECRETARIO(CC_miembro_mesa) VALUES
+('FGH3452'),
+('BNM7612'),
+('YUI5623'),
+('HJK7634');
+
+INSERT INTO VOCAL(CC_miembro_mesa) VALUES
+('CVB8321'),
+('QAZ9631'),
+('WSX8520'),
+('EDC7418');
+
+INSERT INTO MESA(numero_circuito, id_eleccion, CC_presidente, CC_secretario, CC_vocal) VALUES
+(1,1,'QWE6781','FGH3452','CVB8321'),
+(2,1,'ZXC3219','BNM7612','QAZ9631'),
+(3,1,'ASD9870','YUI5623','WSX8520'),
+(4,1,'XCV0741','HJK7634','EDC7418'); 
 

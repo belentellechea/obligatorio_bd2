@@ -107,4 +107,22 @@ END;
 
 //
 
+CREATE TRIGGER insert_votante
+BEFORE INSERT ON VOTANTE
+FOR EACH ROW
+BEGIN
+  DECLARE v_numero INT;
+
+  SELECT numero
+    INTO v_numero
+    FROM CIRCUITO
+   WHERE NEW.CC_persona BETWEEN inicio_rango_cc_habilitadas
+                             AND fin_rango_cc_habilitadas
+   LIMIT 1;
+
+  SET NEW.numero_circuito_esperado = v_numero;
+END
+
+//
+
 DELIMITER ;
