@@ -9,69 +9,133 @@ SELECT
 FROM VOTANTE v
 JOIN PERSONA p ON V.CC_persona=P.CC;
 
-CREATE VIEW resultados_pais AS
+CREATE VIEW resultados_pais_lista_partido AS
 SELECT
+  ce.id_eleccion,
+  COALESCE(CONCAT('Lista ', l.numero), v.tipo) AS lista,
   COALESCE(pp.nombre, v.tipo) AS partido,
   COUNT(*) AS cantidad_votos,
-  SUM(CASE WHEN v.tipo = 'valido_simple' THEN 1 ELSE 0 END) OVER () AS total_validos,
   ROUND(
-    CASE
-      WHEN v.tipo = 'valido_simple' THEN COUNT(*) * 100.0 /
-        NULLIF(SUM(CASE WHEN v.tipo = 'valido_simple' THEN 1 ELSE 0 END) OVER (), 0)
-      ELSE COUNT(*) * 100.0 /
-        NULLIF(COUNT(*) OVER (), 0)
-    END
-  , 2) AS porcentaje
+    COUNT(*) * 100.0 /
+    NULLIF(SUM(COUNT(*)) OVER (PARTITION BY ce.id_eleccion), 0),
+    2
+  ) AS porcentaje
 FROM VOTO v
+JOIN CIRCUITO_ELECCION ce ON v.numero_circuito = ce.numero_circuito
 LEFT JOIN VOTO_PAPELETA vp ON v.ID = vp.id_voto
 LEFT JOIN LISTA l ON vp.id_papeleta = l.id_papeleta
 LEFT JOIN PARTIDO_POLITICO pp ON l.partido = pp.nombre
-GROUP BY pp.nombre, v.tipo
-ORDER BY cantidad_votos DESC;
+GROUP BY ce.id_eleccion, l.numero, pp.nombre, v.tipo
+ORDER BY ce.id_eleccion, cantidad_votos DESC;
 
-CREATE VIEW resultados_por_departamento AS
+CREATE VIEW resultados_pais_partido AS
 SELECT
+  ce.id_eleccion,
+  COALESCE(pp.nombre, v.tipo) AS partido,
+  COUNT(*) AS cantidad_votos,
+  ROUND(
+    COUNT(*) * 100.0 /
+    NULLIF(SUM(COUNT(*)) OVER (PARTITION BY ce.id_eleccion), 0),
+    2
+  ) AS porcentaje
+FROM VOTO v
+JOIN CIRCUITO c ON v.numero_circuito = c.numero
+JOIN CIRCUITO_ELECCION ce ON c.numero = ce.numero_circuito
+LEFT JOIN VOTO_PAPELETA vp ON v.ID = vp.id_voto
+LEFT JOIN LISTA l ON vp.id_papeleta = l.id_papeleta
+LEFT JOIN PARTIDO_POLITICO pp ON l.partido = pp.nombre
+GROUP BY ce.id_eleccion, pp.nombre, v.tipo
+ORDER BY ce.id_eleccion, cantidad_votos DESC;
+
+
+
+CREATE VIEW resultados_departamento_lista_partido AS
+SELECT
+  ce.id_eleccion,
+  d.nombre AS departamento,
+  COALESCE(CONCAT('Lista ', l.numero), v.tipo) AS lista,
+  COALESCE(pp.nombre, v.tipo) AS partido,
+  COUNT(*) AS cantidad_votos,
+  ROUND(
+    COUNT(*) * 100.0 /
+    NULLIF(SUM(COUNT(*)) OVER (PARTITION BY ce.id_eleccion, d.nombre), 0),
+    2
+  ) AS porcentaje
+FROM VOTO v
+JOIN CIRCUITO c ON v.numero_circuito = c.numero
+JOIN CIRCUITO_ELECCION ce ON c.numero = ce.numero_circuito
+JOIN ESTABLECIMIENTO e ON c.id_establecimiento = e.ID
+JOIN LUGAR lgr ON e.id_lugar = lgr.ID
+JOIN DEPARTAMENTO d ON lgr.id_dpto = d.ID
+LEFT JOIN VOTO_PAPELETA vp ON v.ID = vp.id_voto
+LEFT JOIN LISTA l ON vp.id_papeleta = l.id_papeleta
+LEFT JOIN PARTIDO_POLITICO pp ON l.partido = pp.nombre
+GROUP BY ce.id_eleccion, d.nombre, l.numero, pp.nombre, v.tipo
+ORDER BY ce.id_eleccion, d.nombre, cantidad_votos DESC;
+
+CREATE VIEW resultados_departamento_partido AS
+SELECT
+  ce.id_eleccion,
   d.nombre AS departamento,
   COALESCE(pp.nombre, v.tipo) AS partido,
   COUNT(*) AS cantidad_votos,
-  SUM(CASE WHEN v.tipo = 'valido_simple' THEN 1 ELSE 0 END) OVER (PARTITION BY d.nombre) AS total_validos,
   ROUND(
-    CASE
-      WHEN v.tipo = 'valido_simple' THEN COUNT(*) * 100.0 /
-        NULLIF(SUM(CASE WHEN v.tipo = 'valido_simple' THEN 1 ELSE 0 END) OVER (PARTITION BY d.nombre), 0)
-      ELSE COUNT(*) * 100.0 /
-        NULLIF(COUNT(*) OVER (PARTITION BY d.nombre), 0)
-    END
-  , 2) AS porcentaje
+    COUNT(*) * 100.0 /
+    NULLIF(SUM(COUNT(*)) OVER (PARTITION BY ce.id_eleccion, d.nombre), 0),
+    2
+  ) AS porcentaje
 FROM VOTO v
+JOIN CIRCUITO c ON v.numero_circuito = c.numero
+JOIN CIRCUITO_ELECCION ce ON c.numero = ce.numero_circuito
+JOIN ESTABLECIMIENTO e ON c.id_establecimiento = e.ID
+JOIN LUGAR lgr ON e.id_lugar = lgr.ID
+JOIN DEPARTAMENTO d ON lgr.id_dpto = d.ID
 LEFT JOIN VOTO_PAPELETA vp ON v.ID = vp.id_voto
 LEFT JOIN LISTA l ON vp.id_papeleta = l.id_papeleta
 LEFT JOIN PARTIDO_POLITICO pp ON l.partido = pp.nombre
-JOIN CIRCUITO c ON v.numero_circuito = c.numero
-JOIN ESTABLECIMIENTO e ON c.id_establecimiento = e.ID
-JOIN LUGAR lu ON e.id_lugar = lu.ID
-JOIN DEPARTAMENTO d ON lu.id_dpto = d.ID
-GROUP BY d.nombre, pp.nombre, v.tipo
-ORDER BY d.nombre, cantidad_votos DESC;
+GROUP BY ce.id_eleccion, d.nombre, pp.nombre, v.tipo
+ORDER BY ce.id_eleccion, d.nombre, cantidad_votos DESC;
 
-CREATE VIEW vista_resultados_por_circuito AS
+
+
+CREATE VIEW resultados_circuito_lista_partido AS
 SELECT
+  ce.id_eleccion,
+  c.numero AS circuito,
+  COALESCE(CONCAT('Lista ', l.numero), v.tipo) AS lista,
+  COALESCE(pp.nombre, v.tipo) AS partido,
+  COUNT(*) AS cantidad_votos,
+  ROUND(
+    COUNT(*) * 100.0 /
+    NULLIF(SUM(COUNT(*)) OVER (PARTITION BY ce.id_eleccion, c.numero), 0),
+    2
+  ) AS porcentaje
+FROM VOTO v
+JOIN CIRCUITO c ON v.numero_circuito = c.numero
+JOIN CIRCUITO_ELECCION ce ON c.numero = ce.numero_circuito
+LEFT JOIN VOTO_PAPELETA vp ON v.ID = vp.id_voto
+LEFT JOIN LISTA l ON vp.id_papeleta = l.id_papeleta
+LEFT JOIN PARTIDO_POLITICO pp ON l.partido = pp.nombre
+GROUP BY ce.id_eleccion, c.numero, l.numero, pp.nombre, v.tipo
+ORDER BY ce.id_eleccion, c.numero, cantidad_votos DESC;
+
+CREATE VIEW resultados_circuito_partido AS
+SELECT
+  ce.id_eleccion,
   c.numero AS circuito,
   COALESCE(pp.nombre, v.tipo) AS partido,
   COUNT(*) AS cantidad_votos,
-  SUM(CASE WHEN v.tipo = 'valido_simple' THEN 1 ELSE 0 END) OVER (PARTITION BY c.numero) AS total_validos,
   ROUND(
-    CASE
-      WHEN v.tipo = 'valido_simple' THEN COUNT(*) * 100.0 /
-        NULLIF(SUM(CASE WHEN v.tipo = 'valido_simple' THEN 1 ELSE 0 END) OVER (PARTITION BY c.numero), 0)
-      ELSE COUNT(*) * 100.0 /
-        NULLIF(COUNT(*) OVER (PARTITION BY c.numero), 0)
-    END
-  , 2) AS porcentaje
+    COUNT(*) * 100.0 /
+    NULLIF(SUM(COUNT(*)) OVER (PARTITION BY ce.id_eleccion, c.numero), 0),
+    2
+  ) AS porcentaje
 FROM VOTO v
+JOIN CIRCUITO c ON v.numero_circuito = c.numero
+JOIN CIRCUITO_ELECCION ce ON c.numero = ce.numero_circuito
 LEFT JOIN VOTO_PAPELETA vp ON v.ID = vp.id_voto
 LEFT JOIN LISTA l ON vp.id_papeleta = l.id_papeleta
 LEFT JOIN PARTIDO_POLITICO pp ON l.partido = pp.nombre
-JOIN CIRCUITO c ON v.numero_circuito = c.numero
-GROUP BY c.numero, pp.nombre, v.tipo
-ORDER BY c.numero, cantidad_votos DESC;
+GROUP BY ce.id_eleccion, c.numero, pp.nombre, v.tipo
+ORDER BY ce.id_eleccion, c.numero, cantidad_votos DESC;
+
