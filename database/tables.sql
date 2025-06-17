@@ -135,8 +135,8 @@ CREATE TABLE COMISARIA (
 CREATE TABLE CIRCUITO (
     numero INT PRIMARY KEY,
     accesible BOOLEAN,
-    inicio_rango_cc_habilitadas INT NOT NULL,
-    fin_rango_cc_habilitadas INT NOT NULL,
+    inicio_rango_cc_habilitadas VARCHAR(8) NOT NULL,
+    fin_rango_cc_habilitadas VARCHAR(8) NOT NULL,
     id_establecimiento INT,
     FOREIGN KEY (id_establecimiento) REFERENCES ESTABLECIMIENTO(ID),
     CHECK (inicio_rango_cc_habilitadas REGEXP '^[A-Z]{3}[0-9]{4,5}$'),
@@ -211,7 +211,7 @@ CREATE TABLE VOCAL (
 CREATE TABLE MESA (
     ID INT AUTO_INCREMENT,
     numero_circuito INT UNIQUE,
-    id_eleccion INT UNIQUE,
+    id_eleccion INT,
     CC_presidente VARCHAR(8) UNIQUE,
     CC_secretario VARCHAR(8) UNIQUE,
     CC_vocal VARCHAR(8) UNIQUE,
