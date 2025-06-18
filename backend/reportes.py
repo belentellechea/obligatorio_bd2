@@ -129,7 +129,7 @@ def reportesRoutes(app):
             if db:
                 db.close()
                 
-    @app.route("/reportes/listapartido/circuito/<id>", methods=['GET'])
+    @app.route("/reportes/partido/circuito/<id>", methods=['GET'])
     def getReporteCircuitoPartido(id): 
         try: 
             db = get_db_connection()
