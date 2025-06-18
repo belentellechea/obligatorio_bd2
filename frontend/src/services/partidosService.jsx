@@ -1,0 +1,12 @@
+export const getPartidos = async() => { 
+    try {
+        const response = await fetch(`http://localhost:8080/partidos`, {
+            method: "GET",
+        });
+        const data = await response.json();
+        return data; 
+    } catch (error) {
+        console.log("Error obteniendo partidos",error); 
+    }
+}
+
