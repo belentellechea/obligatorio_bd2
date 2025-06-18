@@ -5,6 +5,7 @@ SELECT
     p.nombre,
     p.apellido,
     p.fecha_nacimiento,
+    v.numero_circuito_esperado,
     v.id_eleccion
 FROM VOTANTE v
 JOIN PERSONA p ON v.CC_persona=p.CC;
