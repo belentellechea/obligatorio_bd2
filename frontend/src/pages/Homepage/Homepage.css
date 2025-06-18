@@ -31,3 +31,15 @@
   align-items: center;
   gap: 16px;
 }
+
+.labelNroCircuito {
+  font-size: 16px;
+  color: rgba(65, 65, 67, 0.7);
+  margin-bottom: 16px;
+}
+
+.buscarCircuitoInput {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

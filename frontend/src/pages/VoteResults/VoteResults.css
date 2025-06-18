@@ -5,7 +5,111 @@
   align-items: center;
   gap: 16px;
   align-self: stretch;
+  max-height: 80vh;
+  overflow: hidden;
+}
+
+.filterButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.filterContainer {
+  display: flex;
+  flex-direction: row;
+  display: flex;
+  padding: 4px 24px;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  border-radius: 16px;
+  border: 1px solid #d9d9d9;
+  background: rgba(255, 255, 255, 0.35);
+  align-self: stretch;
+  height: 44px;
+}
+
+.inputAndFilter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.filterResultButton {
+  display: flex;
+  padding: 12px 24px;
+  align-items: center;
+  border-radius: 35px;
+  background: #ffffff00;
+  color: #5e5e5e;
+  font-family: "Schibsted Grotesk";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.filterResultButton:hover {
+  background: #ffffff7e;
+}
+
+.filterResultButton:focus {
+  background: white;
+}
+
+.searchPerson.VoteResults {
+  align-self: stretch;
+  min-width: 210px;
+  background-color: white;
+  margin: 0;
+}
+
+.filterTitle {
+  color: #414143;
+  font-family: "Schibsted Grotesk";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.cancelButton.VoteResults {
+  align-self: flex-end;
+}
+
+.titleDashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  align-self: stretch;
 }
 
 .dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.graphsContainer {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.graph {
+  display: flex;
+  height: 100%;
+  padding: 16px 24px 24px 24px;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
 }
