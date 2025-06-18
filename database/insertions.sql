@@ -344,7 +344,7 @@ INSERT INTO MIEMBRO_MESA(CC_persona, organismo) VALUES
 ('WSX8520','Ministerio de Salud Pública'),
 ('EDC7418','Ministerio de Defensa Nacional');
 
-INSERT INTO USUARIO (contrasenia, CC_mimebro_mesa) VALUES
+INSERT INTO USUARIO (contrasenia, CC_miembro_mesa) VALUES
 ('fG7#Lp9TqX2!', 'QWE6781'),
   ('Km9&TrE5bQ1$', 'ZXC3219'),
   ('hN4*AsD8pL0?', 'ASD9870'),

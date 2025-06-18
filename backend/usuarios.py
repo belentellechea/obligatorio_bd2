@@ -8,11 +8,11 @@ def usuariosRoutes(app):
     @app.route("/loginAdmin", methods=['POST'])
     def loginAdministrador(): 
         try: 
-            data = request.get_json(); 
-            CC = data.get('CC')
-            contrasenia = data.get('constrasenia') 
+            data = request.get_json()
+            contrasenia = data.get('contrasenia') 
+            cc_miembro_mesa = data.get('CC_miembro_mesa')
             
-            if not CC or not contrasenia:
+            if not cc_miembro_mesa or not contrasenia:
                 return jsonify({'error':'Faltan credenciales'}),400
         
             db = get_db_connection()
@@ -20,7 +20,7 @@ def usuariosRoutes(app):
                 return jsonify({"error":"No se pudo conectar a la base de datos"}), 500
             
             cursor = db.cursor(dictionary=True)
-            cursor.execute('SELECT * FROM USUARIO WHERE CC_miembro_mesa = %s AND contrasenia = %s',(CC,contrasenia))
+            cursor.execute('SELECT * FROM USUARIO WHERE CC_miembro_mesa = %s AND contrasenia = %s',(cc_miembro_mesa,contrasenia))
             usuario = cursor.fetchone()
             
             if usuario:
@@ -41,9 +41,9 @@ def usuariosRoutes(app):
     def loginVotante():
         try: 
             data = request.get_json(); 
-            CC = data.get('CC')
+            cc_persona = data.get('CC_persona')
             
-            if not CC:
+            if not cc_persona:
                 return jsonify({'error':'Faltan credenciales'}),400
         
             db = get_db_connection()
@@ -51,7 +51,7 @@ def usuariosRoutes(app):
                 return jsonify({"error":"No se pudo conectar a la base de datos"}), 500
             
             cursor = db.cursor(dictionary=True)
-            cursor.execute('SELECT * FROM VOTANTE WHERE CC_persona=%s',(CC))
+            cursor.execute('SELECT * FROM VOTANTE WHERE CC_persona=%s', (cc_persona,))
             usuario = cursor.fetchone()
             
             if usuario:
