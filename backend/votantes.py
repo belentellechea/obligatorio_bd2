@@ -1,5 +1,5 @@
 from flask import jsonify, request 
-from main import get_db_connection
+from db import get_db_connection
 from mysql.connector import Error 
 import json 
 

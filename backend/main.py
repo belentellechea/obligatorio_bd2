@@ -1,24 +1,26 @@
-from flak import Flask
+from flask import Flask
 from flask_cors import CORS
-import mysql.connector 
 from mysql.connector import Error
+from votos import votosRoutes
+from votantes import votantesRoutes
+from circuitos import circuitosRoutes
+from departamentos import departamentosRoutes
+from listas import listasRoutes
+from partidos import partidosRoutes
+from reportes import reportesRoutes 
+from usuarios import usuariosRoutes
 
 app = Flask(__name__)
 CORS(app, origins='http://localhost:5173')
 
-def get_db_connection(): 
-    try: 
-        db = mysql.connector.connect(
-            host='mysql.reto-ucu.net',
-            port='50006',
-            user='ic_g2_admin',
-            password='Bd2025!',
-            database='IC_Grupo2'
-        )
-        return db
-    except Error as e: 
-        print("Error connecting to MySQL: {e}")
-        return None 
+votosRoutes(app)
+votantesRoutes(app)
+circuitosRoutes(app)
+departamentosRoutes(app)
+listasRoutes(app)
+partidosRoutes(app)
+reportesRoutes(app)
+usuariosRoutes(app)
 
 if __name__ == "__main__":
     app.run(port=8080)
