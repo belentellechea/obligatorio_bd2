@@ -1,6 +1,6 @@
 export const getVotante = async (cc)=>{
     try {
-        const response = await fetch(`http://localhost:8080/votantes/${id}`, {
+        const response = await fetch(`http://localhost:8080/votantes/${cc}`, {
             method: "GET",
         });
         const data = await response.json();

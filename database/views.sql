@@ -7,7 +7,7 @@ SELECT
     p.fecha_nacimiento,
     v.id_eleccion
 FROM VOTANTE v
-JOIN PERSONA p ON V.CC_persona=P.CC;
+JOIN PERSONA p ON v.CC_persona=p.CC;
 
 CREATE VIEW resultados_pais_lista_partido AS
 SELECT

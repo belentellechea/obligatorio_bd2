@@ -13,7 +13,7 @@ def votantesRoutes(app):
                 return jsonify({"error":"No se pudo conectar a la base de datos"}), 500
             
             cursor = db.cursor(dictionary=True)
-            cursor.execute('SELECT * FROM info_votante WHERE CC=%s',(cc,))
+            cursor.execute('SELECT * FROM info_votante WHERE credencial=%s',(cc,))
             votante = cursor.fetchone()
             
             if not votante:
