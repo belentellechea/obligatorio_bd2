@@ -7,6 +7,7 @@
   align-self: stretch;
   max-height: 80vh;
   overflow: hidden;
+  max-width: 1000px;
 }
 
 .filterButtons {
@@ -27,8 +28,8 @@
   border-radius: 16px;
   border: 1px solid #d9d9d9;
   background: rgba(255, 255, 255, 0.35);
-  align-self: stretch;
   height: 44px;
+  width: 100%;
 }
 
 .inputAndFilter {
@@ -67,6 +68,7 @@
   min-width: 210px;
   background-color: white;
   margin: 0;
+  width: 95%;
 }
 
 .filterTitle {
@@ -105,11 +107,6 @@
   align-self: stretch;
 }
 
-.graph {
-  display: flex;
-  height: 100%;
-  padding: 16px 24px 24px 24px;
-  flex-direction: column;
-  align-items: center;
-  gap: 48px;
+.graph.Partido {
+  min-height: 100%;
 }
