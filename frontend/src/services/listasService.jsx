@@ -1,6 +1,8 @@
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export const getListaPorPartido = async (id) => {
     try {
-        const response = await fetch(`http://localhost:8080/listas/partido/${id}`, {
+        const response = await fetch(`${apiUrl}/listas/partido/${id}`, {
             method: "GET",
         });
         const data = await response.json();

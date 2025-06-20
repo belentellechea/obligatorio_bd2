@@ -1,6 +1,8 @@
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export const getPartidos = async() => { 
     try {
-        const response = await fetch(`http://localhost:8080/partidos`, {
+        const response = await fetch(`${apiUrl}/partidos`, {
             method: "GET",
         });
         const data = await response.json();

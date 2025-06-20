@@ -1,3 +1,12 @@
+DROP VIEW IF EXISTS
+  resultados_circuito_partido,
+  resultados_circuito_lista_partido,
+  resultados_departamento_partido,
+  resultados_departamento_lista_partido,
+  resultados_pais_partido,
+  resultados_pais_lista_partido,
+  info_votante;
+
 CREATE VIEW info_votante AS
 SELECT
     p.CC AS credencial,
@@ -5,9 +14,10 @@ SELECT
     p.nombre,
     p.apellido,
     p.fecha_nacimiento,
+    v.numero_circuito_esperado,
     v.id_eleccion
 FROM VOTANTE v
-JOIN PERSONA p ON V.CC_persona=P.CC;
+JOIN PERSONA p ON v.CC_persona=p.CC;
 
 CREATE VIEW resultados_pais_lista_partido AS
 SELECT

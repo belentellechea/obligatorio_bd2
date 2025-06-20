@@ -1,3 +1,5 @@
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export const postVoto = async ({numero_circuito,tipo,observado=false,id_papeleta=null}) => {
     try {
         const payload = {
@@ -11,7 +13,7 @@ export const postVoto = async ({numero_circuito,tipo,observado=false,id_papeleta
             payload.id_papeleta = id_papeleta;
         }
 
-        const response = await fetch(`http://localhost:8080/voto`, {
+        const response = await fetch(`${apiUrl}/voto`, {
             method: "POST",
             headers: {
                 "Content_Type":"application/json"

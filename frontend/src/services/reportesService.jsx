@@ -1,6 +1,8 @@
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export const getReporteListaPartidoPais = async () => {
     try {
-        const response = await fetch(`http://localhost:8080/listapartido/pais`, {
+        const response = await fetch(`${apiUrl}/listapartido/pais`, {
             method: "GET",
         });
         const data = await response.json();
@@ -12,7 +14,7 @@ export const getReporteListaPartidoPais = async () => {
 
 export const getReportePartidoPais = async () => {
     try {
-        const response = await fetch(`http://localhost:8080/partido/pais`, {
+        const response = await fetch(`${apiUrl}/partido/pais`, {
             method: "GET",
         });
         const data = await response.json();
@@ -24,7 +26,7 @@ export const getReportePartidoPais = async () => {
 
 export const getReporteListaPartidoDpto = async (nombre) => {
     try {
-        const response = await fetch(`http://localhost:8080/listapartido/departamento/${nombre}`, {
+        const response = await fetch(`${apiUrl}/listapartido/departamento/${nombre}`, {
             method: "GET",
         });
         const data = await response.json();
@@ -36,7 +38,7 @@ export const getReporteListaPartidoDpto = async (nombre) => {
 
 export const getReportePartidoDpto = async () => {
     try {
-        const response = await fetch(`http://localhost:8080/partido/departamento/${nombre}`, {
+        const response = await fetch(`${apiUrl}/partido/departamento/${nombre}`, {
             method: "GET",
         });
         const data = await response.json();
@@ -48,7 +50,7 @@ export const getReportePartidoDpto = async () => {
 
 export const getReporteListaPartidoCircuito = async (id) => {
     try {
-        const response = await fetch(`http://localhost:8080/listapartido/circuito/${id}`, {
+        const response = await fetch(`${apiUrl}/listapartido/circuito/${id}`, {
             method: "GET",
         });
         const data = await response.json();
@@ -60,7 +62,7 @@ export const getReporteListaPartidoCircuito = async (id) => {
 
 export const getReportePartidoCircuito = async (id) => {
     try {
-        const response = await fetch(`http://localhost:8080/partido/circuito/${id}`, {
+        const response = await fetch(`${apiUrl}/partido/circuito/${id}`, {
             method: "GET",
         });
         const data = await response.json();

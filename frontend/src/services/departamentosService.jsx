@@ -1,6 +1,8 @@
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export const getDepartamentos = async () => {
     try {
-        const response = await fetch(`http://localhost:8080/departamentos`, {
+        const response = await fetch(`${apiUrl}/departamentos`, {
             method: "GET",
         });
         const data = await response.json();
