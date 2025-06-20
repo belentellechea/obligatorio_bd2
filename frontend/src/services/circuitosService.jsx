@@ -1,6 +1,8 @@
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export const getCircuitos = async () => {
     try {
-        const response = await fetch(`http://localhost:8080/circuitos`, {
+        const response = await fetch(`${apiUrl}/circuitos`, {
             method: "GET",
         });
         const data = await response.json();

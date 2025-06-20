@@ -1,6 +1,8 @@
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export const loginAdmin = async ({cc_miembro_mesa,contrasenia}) => {
     try {
-        const response = await fetch(`http://localhost:8080/loginAdmin`, {
+        const response = await fetch(`${apiUrl}/loginAdmin`, {
             method: "POST",
             headers: {
                 "Content-Type":"application/json"
@@ -23,7 +25,7 @@ export const loginAdmin = async ({cc_miembro_mesa,contrasenia}) => {
 
 export const loginVotante = async ({cc_persona}) => {
     try {
-        const response = await fetch(`http://localhost:8080/login`, {
+        const response = await fetch(`${apiUrl}/login`, {
             method: "POST",
             headers: {
                 "Content-Type":"application/json"

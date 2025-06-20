@@ -1,6 +1,8 @@
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export const getVotante = async (cc)=>{
     try {
-        const response = await fetch(`http://localhost:8080/votantes/${cc}`, {
+        const response = await fetch(`${apiUrl}/votantes/${cc}`, {
             method: "GET",
         });
         const data = await response.json();

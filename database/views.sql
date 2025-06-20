@@ -1,3 +1,12 @@
+DROP VIEW IF EXISTS
+  resultados_circuito_partido,
+  resultados_circuito_lista_partido,
+  resultados_departamento_partido,
+  resultados_departamento_lista_partido,
+  resultados_pais_partido,
+  resultados_pais_lista_partido,
+  info_votante;
+
 CREATE VIEW info_votante AS
 SELECT
     p.CC AS credencial,
