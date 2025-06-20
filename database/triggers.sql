@@ -1,3 +1,12 @@
+DROP TRIGGER IF EXISTS lista_unica_eleccion_nacional;
+DROP TRIGGER IF EXISTS lista_unica_eleccion_municipal;
+DROP TRIGGER IF EXISTS dos_formula_por_ballotage;
+DROP TRIGGER IF EXISTS max_2_papeleta_si_no;
+DROP TRIGGER IF EXISTS color_unico_por_referendum;
+DROP TRIGGER IF EXISTS verificar_anio_candidato;
+DROP TRIGGER IF EXISTS insert_votante;
+
+
 DELIMITER //
 
 CREATE TRIGGER lista_unica_eleccion_nacional
@@ -113,15 +122,16 @@ FOR EACH ROW
 BEGIN
   DECLARE v_numero INT;
 
-  SELECT numero
+  SELECT CE.numero_circuito
     INTO v_numero
-    FROM CIRCUITO
-   WHERE NEW.CC_persona BETWEEN inicio_rango_cc_habilitadas
-                             AND fin_rango_cc_habilitadas
+    FROM CIRCUITO_ELECCION CE
+    JOIN CIRCUITO C ON CE.numero_circuito = C.numero
+   WHERE CE.id_eleccion = NEW.id_eleccion
+     AND NEW.CC_persona BETWEEN C.inicio_rango_cc_habilitadas AND C.fin_rango_cc_habilitadas
    LIMIT 1;
 
   SET NEW.numero_circuito_esperado = v_numero;
-END
+END;
 
 //
 
