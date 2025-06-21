@@ -52,7 +52,6 @@ export default function GraphComponent({ title, data }) {
         ) : (
           <Pie data={data} className="pieChart" />
         )}
-        {/* <Bar data={data} /> */}
       </div>
     </div>
   );

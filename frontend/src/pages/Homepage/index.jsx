@@ -1,5 +1,6 @@
 import "./Homepage.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Homepage() {
   const [numero, setNumero] = useState("");
@@ -11,7 +12,7 @@ export default function Homepage() {
 
   return (
     <div className="homeContainer">
-      <div className="container">
+      <div className="container homePage">
         <div className="titulo-logo">
           <div className="logo-isologo">
             <img
@@ -24,22 +25,44 @@ export default function Homepage() {
             ></img>
           </div>
           <div className="titulo-subtitulo">
-            <h1 className="title"> Elecciones Presidenciales </h1>
-            <h2 className="subtitle"> Período 2025</h2>
+            <h1 className="title"> Sistema de elecciones</h1>
           </div>
         </div>
-        <div className="buscarCircuitoInput">
-          <label for="buscarCircuito" className="labelNroCircuito">
-            Ingrese el número del circuito
-          </label>
-          <input
-            id="buscarCircuito"
-            type="number"
-            value={numero}
-            onChange={handleChange}
-          ></input>
+        <div className="inputSelect-container">
+          <div className="select-tipoFecha">
+            <div className="select">
+              <label className="labelCircuito"> Tipo de elección</label>
+              <select name="cars" id="cars" className="select-tipoEleccion">
+                <option value="volvo">Presidencial</option>
+                <option value="audi">Municipal</option>
+                <option value="saab">Ballotage</option>
+                <option value="mercedes">Plebicito/Referéndum</option>
+              </select>
+            </div>
+            <div className="select">
+              <label className="labelCircuito"> Fecha</label>
+              <input type="date"></input>
+            </div>
+          </div>
+          <div className="buscarCircuitoInput">
+            <label for="buscarCircuito" className="labelCircuito">
+              Número del circuito
+            </label>
+            <input
+              id="buscarCircuito"
+              type="number"
+              value={numero}
+              onChange={handleChange}
+            ></input>
+          </div>
         </div>
-        <button>Comenzar</button>
+        <button
+          onClick={() => {
+            navigate("/selectUser");
+          }}
+        >
+          Comenzar
+        </button>
       </div>
     </div>
   );

@@ -1,4 +1,11 @@
 // import "./App.css";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+
 import Homepage from "../src/pages/Homepage";
 import SelectUser from "./pages/SelectUser";
 import UserLogin from "./pages/UserLogin";
@@ -11,14 +18,18 @@ import VoteResults from "./pages/VoteResults";
 function App() {
   return (
     <>
-      {/* <Homepage /> */}
-      {/* <SelectUser /> */}
-      {/* <UserLogin /> */}
-      {/* <UserHome /> */}
-      {/* <AdminLogin /> */}
-      {/* <AdminHome /> */}
-      {/* <AdminSearch /> */}
-      <VoteResults />
+      <Router>
+        <Routes>
+          <Route path="*" element={<Homepage replace to="/homepage" />} />
+          <Route path="/login" element={<UserLogin />} />
+          <Route path="/selectUser" element={<SelectUser />} />
+          <Route path="/home" element={<UserHome />} />
+          <Route path="/adminLogin" element={<AdminLogin />} />
+          <Route path="/adminHome" element={<AdminHome />} />
+          <Route path="/adminSearch" element={<AdminSearch />} />
+          <Route path="/voteResults" element={<VoteResults />} />
+        </Routes>
+      </Router>
     </>
   );
 }
