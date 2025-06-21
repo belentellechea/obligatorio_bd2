@@ -16,7 +16,38 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 48px;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.select-tipoEleccion {
+  display: flex;
+  padding: 16px 32px;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 16px;
+  border: 1px solid #d9d9d9;
+  background: rgba(255, 255, 255, 0.8);
+  width: 100%;
+}
+
+.inputSelect-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.select-tipoFecha {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.select {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .titulo-subtitulo {
@@ -32,14 +63,18 @@
   gap: 16px;
 }
 
-.labelNroCircuito {
+.labelCircuito {
   font-size: 16px;
   color: rgba(65, 65, 67, 0.7);
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 .buscarCircuitoInput {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.container.homePage {
+  gap: 48px;
 }
