@@ -1,13 +1,34 @@
 import "./Homepage.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getEleccion } from "../../services/eleccionesService";
 
 export default function Homepage() {
+  const navigate = useNavigate(); 
   const [numero, setNumero] = useState("");
+  const [tipo, setTipo] = useState("presidencial");
+  const [fecha, setFecha] = useState(""); 
 
   const handleChange = (e) => {
     const soloNumeros = e.target.value.replace(/[^0-9]/g, "");
     setNumero(soloNumeros);
+  };
+
+  const handleStart = async () => {
+    console.log({tipo,fecha,numero})
+    try {
+      const data = await getEleccion({tipo,fecha}); 
+
+      if (data && data.ID) {
+        localStorage.setItem("id_eleccion", data.ID);
+        localStorage.setItem("numero_circuito",numero)
+        navigate("/selectUser");
+      } else {
+        alert("No se encontró la elección para esos datos");
+      }
+    } catch (error) {
+      alert("Ocurrió un error al buscar la elección");
+    }
   };
 
   return (
@@ -32,16 +53,17 @@ export default function Homepage() {
           <div className="select-tipoFecha">
             <div className="select">
               <label className="labelCircuito"> Tipo de elección</label>
-              <select name="cars" id="cars" className="select-tipoEleccion">
-                <option value="volvo">Presidencial</option>
-                <option value="audi">Municipal</option>
-                <option value="saab">Ballotage</option>
-                <option value="mercedes">Plebicito/Referéndum</option>
+              <select name="cars" id="cars" className="select-tipoEleccion" 
+              value={tipo} onChange={(e)=>setTipo(e.target.value)}>
+                <option value="presidencial">Presidencial</option>
+                <option value="municipal">Municipal</option>
+                <option value="ballotage">Ballotage</option>
+                <option value="referendum/plebiscito">Plebiscito/Referéndum</option>
               </select>
             </div>
             <div className="select">
               <label className="labelCircuito"> Fecha</label>
-              <input type="date"></input>
+              <input type="date" value={fecha} onChange={(e)=>setFecha(e.target.value)}></input>
             </div>
           </div>
           <div className="buscarCircuitoInput">
@@ -57,9 +79,7 @@ export default function Homepage() {
           </div>
         </div>
         <button
-          onClick={() => {
-            navigate("/selectUser");
-          }}
+          onClick={handleStart}
         >
           Comenzar
         </button>

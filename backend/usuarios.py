@@ -20,7 +20,12 @@ def usuariosRoutes(app):
                 return jsonify({"error":"No se pudo conectar a la base de datos"}), 500
             
             cursor = db.cursor(dictionary=True)
-            cursor.execute('SELECT * FROM USUARIO WHERE CC_miembro_mesa = %s AND contrasenia = %s',(cc_miembro_mesa,contrasenia))
+            cursor.execute("""
+                SELECT p.CC, p.CI, p.nombre, p.apellido, p.fecha_nacimiento
+                FROM USUARIO u
+                JOIN PERSONA p ON u.CC_miembro_mesa = p.CC
+                WHERE u.CC_miembro_mesa = %s AND u.contrasenia = %s
+            """, (cc_miembro_mesa, contrasenia))
             usuario = cursor.fetchone()
             
             if usuario:

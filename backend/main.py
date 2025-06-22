@@ -8,8 +8,8 @@ from departamentos import departamentosRoutes
 from listas import listasRoutes
 from partidos import partidosRoutes
 from reportes import reportesRoutes 
-from usuarios import usuariosRoutes
 from elecciones import eleccionesRoutes
+from usuarios import usuariosRoutes
 
 app = Flask(__name__)
 CORS(app, origins='http://localhost:5173')
@@ -21,8 +21,8 @@ departamentosRoutes(app)
 listasRoutes(app)
 partidosRoutes(app)
 reportesRoutes(app)
-usuariosRoutes(app)
 eleccionesRoutes(app)
+usuariosRoutes(app)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=8080)
