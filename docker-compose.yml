@@ -11,7 +11,7 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: pass
     volumes:
-      - db_data:/var/lib/mysql                      # <-- ¡Acá se persiste!
+      - db_data:/var/lib/mysql                     
       - ./database/tables.sql:/docker-entrypoint-initdb.d/01_tables.sql
       - ./database/triggers.sql:/docker-entrypoint-initdb.d/02_triggers.sql
       - ./database/insertions.sql:/docker-entrypoint-initdb.d/03_insertions.sql

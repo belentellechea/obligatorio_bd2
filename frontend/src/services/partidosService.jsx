@@ -1,9 +1,13 @@
 const apiUrl = import.meta.env.VITE_API_URL;
 
-export const getPartidos = async() => { 
+export const getPartidos = async(id_eleccion) => { 
     try {
         const response = await fetch(`${apiUrl}/partidos`, {
-            method: "GET",
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ id_eleccion })
         });
         const data = await response.json();
         return data; 

@@ -6,15 +6,21 @@ import json
 
 def reportesRoutes(app): 
     
-    @app.route("/reportes/listapartido/pais", methods=['GET'])
+    @app.route("/reportes/listapartido/pais", methods=['POST'])
     def getReportePaisListaPartido(): 
+        data = request.get_json()
+        id_eleccion = data.get("id_eleccion")
+        
+        if not id_eleccion:
+            return jsonify({"error": "id_eleccion requerido"}), 400
+        
         try: 
             db = get_db_connection()
             if db is None: 
                 return jsonify({"error":"No se pudo conectar a la base de datos"}), 500
             
             cursor = db.cursor(dictionary=True)
-            cursor.execute('SELECT * FROM resultados_pais_lista_partido WHERE id_eleccion=1')
+            cursor.execute('SELECT * FROM resultados_pais_lista_partido WHERE id_eleccion=%s',(id_eleccion,))
             resultados_pais = cursor.fetchone()
             
             return jsonify({"resultados_pais": resultados_pais}), 200
@@ -28,15 +34,21 @@ def reportesRoutes(app):
             if db:
                 db.close()
     
-    @app.route("/reportes/partido/pais", methods=['GET'])
+    @app.route("/reportes/partido/pais", methods=['POST'])
     def getReportePaisPartido(): 
+        data = request.get_json()
+        id_eleccion = data.get("id_eleccion")
+        
+        if not id_eleccion:
+            return jsonify({"error": "id_eleccion requerido"}), 400
+        
         try: 
             db = get_db_connection()
             if db is None: 
                 return jsonify({"error":"No se pudo conectar a la base de datos"}), 500
             
             cursor = db.cursor(dictionary=True)
-            cursor.execute('SELECT * FROM resultados_pais_partido WHERE id_eleccion=1')
+            cursor.execute('SELECT * FROM resultados_pais_partido WHERE id_eleccion=%s',(id_eleccion,))
             resultados_pais = cursor.fetchone()
             
             return jsonify({"resultados_pais": resultados_pais}), 200
@@ -52,15 +64,21 @@ def reportesRoutes(app):
     
     
     
-    @app.route("/reportes/listapartido/departamento/<nombre>", methods=['GET'])
+    @app.route("/reportes/listapartido/departamento/<nombre>", methods=['POST'])
     def getReporteDptoListaParido(nombre): 
+        data = request.get_json()
+        id_eleccion = data.get("id_eleccion")
+        
+        if not id_eleccion:
+            return jsonify({"error": "id_eleccion requerido"}), 400
+        
         try: 
             db = get_db_connection()
             if db is None: 
                 return jsonify({"error":"No se pudo conectar a la base de datos"}), 500
             
             cursor = db.cursor(dictionary=True)
-            cursor.execute('SELECT * FROM resultados_departamento_lista_partido WHERE id_eleccion=1 AND departamento=%s',(nombre,))
+            cursor.execute('SELECT * FROM resultados_departamento_lista_partido WHERE id_eleccion=%s AND departamento=%s',(id_eleccion,nombre))
             resultados_departamento = cursor.fetchone()
             
             if not resultados_departamento:
@@ -77,15 +95,21 @@ def reportesRoutes(app):
             if db:
                 db.close()  
                 
-    @app.route("/reportes/partido/departamento/<nombre>", methods=['GET'])
+    @app.route("/reportes/partido/departamento/<nombre>", methods=['POST'])
     def getReporteDptoParido(nombre): 
+        data = request.get_json()
+        id_eleccion = data.get("id_eleccion")
+        
+        if not id_eleccion:
+            return jsonify({"error": "id_eleccion requerido"}), 400
+        
         try: 
             db = get_db_connection()
             if db is None: 
                 return jsonify({"error":"No se pudo conectar a la base de datos"}), 500
             
             cursor = db.cursor(dictionary=True)
-            cursor.execute('SELECT * FROM resultados_departamento_partido WHERE id_eleccion=1 AND departamento=%s',(nombre,))
+            cursor.execute('SELECT * FROM resultados_departamento_partido WHERE id_eleccion=%s AND departamento=%s',(id_eleccion,nombre))
             resultados_departamento = cursor.fetchone()
             
             if not resultados_departamento:
@@ -104,15 +128,21 @@ def reportesRoutes(app):
                 
                 
     
-    @app.route("/reportes/listapartido/circuito/<id>", methods=['GET'])
+    @app.route("/reportes/listapartido/circuito/<id>", methods=['POST'])
     def getReporteCircuitoListaPartido(id): 
+        data = request.get_json()
+        id_eleccion = data.get("id_eleccion")
+        
+        if not id_eleccion:
+            return jsonify({"error": "id_eleccion requerido"}), 400
+        
         try: 
             db = get_db_connection()
             if db is None: 
                 return jsonify({"error":"No se pudo conectar a la base de datos"}), 500
             
             cursor = db.cursor(dictionary=True)
-            cursor.execute('SELECT * FROM resultados_circuito_lista_partido WHERE id_eleccion=1 AND circuito=%s',(id))
+            cursor.execute('SELECT * FROM resultados_circuito_lista_partido WHERE id_eleccion=%s AND circuito=%s',(id_eleccion,id))
             resultados_circuito = cursor.fetchone()
             
             if not resultados_circuito:
@@ -129,15 +159,21 @@ def reportesRoutes(app):
             if db:
                 db.close()
                 
-    @app.route("/reportes/partido/circuito/<id>", methods=['GET'])
+    @app.route("/reportes/partido/circuito/<id>", methods=['POST'])
     def getReporteCircuitoPartido(id): 
+        data = request.get_json()
+        id_eleccion = data.get("id_eleccion")
+        
+        if not id_eleccion:
+            return jsonify({"error": "id_eleccion requerido"}), 400
+        
         try: 
             db = get_db_connection()
             if db is None: 
                 return jsonify({"error":"No se pudo conectar a la base de datos"}), 500
             
             cursor = db.cursor(dictionary=True)
-            cursor.execute('SELECT * FROM resultados_circuito_partido WHERE id_eleccion=1 AND circuito=%s',(id))
+            cursor.execute('SELECT * FROM resultados_circuito_partido WHERE id_eleccion=%s AND circuito=%s',(id_eleccion,id))
             resultados_circuito = cursor.fetchone()
             
             if not resultados_circuito:

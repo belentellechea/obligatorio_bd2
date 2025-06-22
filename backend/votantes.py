@@ -5,15 +5,22 @@ import json
 
 def votantesRoutes(app): 
     
-    @app.route("/votantes/<cc>", methods=['GET'])
-    def getVotante(cc): 
+    @app.route("/votantes", methods=['POST'])
+    def getVotante():
+        data = request.get_json()
+        cc = data.get("cc")
+        id_eleccion = data.get("id_eleccion")
+        
+        if not cc or not id_eleccion:
+            return jsonify({"error":"Faltan datos"})
+         
         try: 
             db = get_db_connection()
             if db is None: 
                 return jsonify({"error":"No se pudo conectar a la base de datos"}), 500
             
             cursor = db.cursor(dictionary=True)
-            cursor.execute('SELECT * FROM info_votante WHERE credencial=%s',(cc,))
+            cursor.execute('SELECT * FROM info_votante WHERE credencial=%s AND id_eleccion = %s',(cc,id_eleccion))
             votante = cursor.fetchone()
             
             if not votante:
