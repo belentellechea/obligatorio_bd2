@@ -1,11 +1,15 @@
 const apiUrl = import.meta.env.VITE_API_URL;
 
-export const postVoto = async ({numero_circuito,tipo,observado=false,id_papeleta=null}) => {
+export const postVoto = async ({numero_circuito_vota,tipo,observado=false,id_papeleta=null,cc_votante,id_eleccion,id_sobre}) => {
     try {
         const payload = {
-            numero_circuito,
+            numero_circuito_vota,
             tipo,
-            observado
+            observado,
+            id_papeleta,
+            cc_votante,
+            id_eleccion,
+            id_sobre
         }; 
 
         if (tipo === "valido_simple") {
@@ -16,7 +20,7 @@ export const postVoto = async ({numero_circuito,tipo,observado=false,id_papeleta
         const response = await fetch(`${apiUrl}/voto`, {
             method: "POST",
             headers: {
-                "Content_Type":"application/json"
+                "Content-Type":"application/json"
             },
             body: JSON.stringify(payload),
         });
