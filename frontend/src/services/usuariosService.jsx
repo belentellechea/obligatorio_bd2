@@ -1,13 +1,13 @@
 const apiUrl = import.meta.env.VITE_API_URL;
 
-export const loginAdmin = async ({cc_miembro_mesa,contrasenia}) => {
+export const loginAdmin = async ({CC_miembro_mesa,contrasenia}) => {
     try {
         const response = await fetch(`${apiUrl}/loginAdmin`, {
             method: "POST",
             headers: {
                 "Content-Type":"application/json"
             },
-            body: JSON.stringify({cc_miembro_mesa,contrasenia}),
+            body: JSON.stringify({CC_miembro_mesa,contrasenia}),
         });
 
         const data = await response.json();

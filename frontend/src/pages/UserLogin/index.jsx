@@ -1,6 +1,38 @@
 import "./UserLogin.css";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { getVotante } from "../../services/votantesService";
 
 export default function UserLogin() {
+  const [cc,setCc] = useState(""); 
+  const navigate = useNavigate(); 
+
+  const handleInputChange = (e) => {
+    setCc(e.target.value.toUpperCase().replace(/\s+/g, "")); 
+  }
+
+  const handleNext = async () => {
+    const id_eleccion = localStorage.getItem("id_eleccion");
+
+    if (!cc || !id_eleccion) {
+      alert("Debe ingresar la credencial y tener una elección activa");
+      return;
+    }
+
+    const data = await getVotante(cc, id_eleccion);
+
+    if (data && !data.error) {
+      localStorage.setItem("votante", JSON.stringify(data));
+      navigate("/home"); 
+    } else {
+      alert("No se encontró un votante con esa credencial para esta elección");
+    }
+  }
+
+  const handleCancel = () => {
+    navigate("/selectUser"); 
+  };
+
   return (
     <div className="container userLogin">
       <div className="UserLogin-titleContainer">
@@ -11,10 +43,13 @@ export default function UserLogin() {
         </div>
       </div>
       <div className="UserLogin-inputButtonsContainer">
-        <input placeholder="Ejemplo: ABC-1234  "></input>
+        <input placeholder="Ejemplo: ABC1234"
+        value={cc}
+        onChange={handleInputChange}
+        ></input>
         <div className="buttonsContainer UserLogin">
-          <button className="cancelButton">Cancelar</button>
-          <button>Siguiente</button>
+          <button className="cancelButton" onClick={handleCancel}>Cancelar</button>
+          <button onClick={handleNext}>Siguiente</button>
         </div>
       </div>
     </div>

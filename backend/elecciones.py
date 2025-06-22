@@ -22,7 +22,7 @@ def eleccionesRoutes(app):
                 tabla_tipo = "ELECCION_PRESIDENCIAL"
             elif tipo.lower() == "municipal":
                 tabla_tipo = "ELECCION_MUNICIPAL"
-            elif tipo.lower() == "plebiscito":
+            elif tipo.lower() == "referendum/plebiscito":
                 tabla_tipo = "REFERENDUM_PLEBISCITO"
             elif tipo.lower() == "ballotage":
                 tabla_tipo = "BALLOTAGE"
