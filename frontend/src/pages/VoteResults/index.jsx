@@ -1,7 +1,14 @@
 import "./VoteResults.css";
-import GraphComponent from "../../components/graphComponent";
-import { getReporteListaPartidoPais,getReportePartidoPais,getReporteListaPartidoDpto,getReportePartidoDpto,getReporteListaPartidoCircuito,getReportePartidoCircuito } from "../../services/reportesService";
-import { useState,useEffect } from "react";
+import GraphComponent from "../../components/GraphComponent";
+import {
+  getReporteListaPartidoPais,
+  getReportePartidoPais,
+  getReporteListaPartidoDpto,
+  getReportePartidoDpto,
+  getReporteListaPartidoCircuito,
+  getReportePartidoCircuito,
+} from "../../services/reportesService";
+import { useState, useEffect } from "react";
 
 const chartData = {
   labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
@@ -33,11 +40,9 @@ const chartData = {
 export default function VoteResults() {
   const [chartDataLista, setChartDataLista] = useState(null);
   const [chartDataPartido, setChartDataPartido] = useState(null);
-  const [filter, setFilter] = useState("pais"); 
+  const [filter, setFilter] = useState("pais");
   const [inputValue, setInputValue] = useState("");
   const [idEleccion] = useState(localStorage.getItem("id_eleccion"));
-
-  
 
   return (
     <div className="container VoteResults">
