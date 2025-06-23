@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   db:
-    image: mysql:8.0.4
+    image: mysql:8.0.42
     container_name: mysql_db
     restart: always
     environment:
@@ -11,7 +11,7 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: pass
     volumes:
-      - db_data:/var/lib/mysql                     
+      - db_data:/var/lib/mysql
       - ./database/tables.sql:/docker-entrypoint-initdb.d/01_tables.sql
       - ./database/triggers.sql:/docker-entrypoint-initdb.d/02_triggers.sql
       - ./database/insertions.sql:/docker-entrypoint-initdb.d/03_insertions.sql
@@ -22,6 +22,7 @@ services:
   backend:
     build: ./backend
     container_name: flask_backend
+    platform: linux/x86_64
     depends_on:
       - db
     environment:
@@ -33,7 +34,7 @@ services:
     ports:
       - "8080:8080"
     # expose:
-      # - "8080"  Solo accesible internamente desde frontend
+    # - "8080"  Solo accesible internamente desde frontend
 
   frontend:
     build: ./frontend
@@ -43,7 +44,7 @@ services:
     ports:
       - "5173:5173"
     environment:
-      VITE_API_URL: http://flask_backend:8080  # Interno en red Docker
+      VITE_API_URL: http://flask_backend:8080 # Interno en red Docker
 
 volumes:
   db_data:
