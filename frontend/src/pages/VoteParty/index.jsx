@@ -1,5 +1,6 @@
-import ListComponent from "../../components/listComponent";
+import ListComponent from "../../components/ListComponent";
 import "./VoteParty.css";
+import { useNavigate } from "react-router-dom";
 
 const data = [
   {
@@ -31,6 +32,8 @@ const data = [
 ];
 
 export default function VoteParty() {
+  const navigate = useNavigate();
+
   return (
     <div className="container VoteParty">
       <h1> Elige un partido </h1>
@@ -44,7 +47,10 @@ export default function VoteParty() {
         ))}
       </div>
 
-      <button className="cancelButton"> Volver</button>
+      <button className="cancelButton" onClick={() => navigate("/home")}>
+        {" "}
+        Volver
+      </button>
     </div>
   );
 }

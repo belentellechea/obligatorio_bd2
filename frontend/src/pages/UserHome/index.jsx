@@ -1,6 +1,9 @@
 import "./UserHome.css";
+import { useNavigate } from "react-router-dom";
 
 export default function UserHome() {
+  const navigate = useNavigate();
+
   return (
     <div className="container UserHome">
       <div className="titleContainer">
@@ -21,7 +24,9 @@ export default function UserHome() {
           <t>Voto anulado</t>
         </button>
       </div>
-      <button className="cancelButton">Cancelar</button>
+      <button className="cancelButton" onClick={() => navigate("/home")}>
+        Cancelar
+      </button>
     </div>
   );
 }
