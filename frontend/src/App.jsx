@@ -14,6 +14,7 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminHome from "./pages/AdminHome/Index";
 import AdminSearch from "./pages/AdminSearch/Index";
 import VoteResults from "./pages/VoteResults";
+import VoteParty from "./pages/VoteParty";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/adminHome" element={<AdminHome />} />
           <Route path="/adminSearch" element={<AdminSearch />} />
           <Route path="/voteResults" element={<VoteResults />} />
+          <Route path="/voteParty" element={<VoteParty />} />
         </Routes>
       </Router>
     </>

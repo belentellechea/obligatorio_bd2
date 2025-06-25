@@ -1,0 +1,14 @@
+.partyList {
+  width: 800px;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.container.VoteParty {
+  height: 600px;
+  gap: 48px;
+}

@@ -1,6 +1,9 @@
 import "./AdminSearch.css";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminSearch() {
+  const navigate = useNavigate();
+
   return (
     <div className="container AdminSearch">
       <div className="titleContainer">
@@ -11,7 +14,9 @@ export default function AdminSearch() {
         </div>
       </div>
       <input className="searchPerson" placeholder="Ejemplo: ABC 1234  "></input>
-      <button className="cancelButton">Volver</button>
+      <button className="cancelButton" onClick={() => navigate("/adminLogin")}>
+        Volver
+      </button>
     </div>
   );
 }
