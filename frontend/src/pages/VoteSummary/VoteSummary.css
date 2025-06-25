@@ -1,0 +1,17 @@
+.datosContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.image {
+  width: 204px;
+  height: 224px;
+  border-radius: 16px;
+  background: rgba(33, 47, 84, 0.35);
+}
+
+.container {
+  gap: 48px;
+}

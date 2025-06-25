@@ -48,7 +48,7 @@ export default function GraphComponent({ title, data }) {
       </div>
       <div className="graph">
         {chartIndex === 0 ? (
-          <Bar data={data} />
+          <Bar data={data} className="barChart" />
         ) : (
           <Pie data={data} className="pieChart" />
         )}

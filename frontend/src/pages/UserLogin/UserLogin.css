@@ -24,8 +24,8 @@
 .buttonsContainer.UserLogin {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  align-self: stretch;
+  gap: 8px;
+  width: 100%;
 }
 
 .buttonsContainer.UserLogin button {

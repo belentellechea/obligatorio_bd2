@@ -14,6 +14,9 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminHome from "./pages/AdminHome/Index";
 import AdminSearch from "./pages/AdminSearch/Index";
 import VoteResults from "./pages/VoteResults";
+import VoteParty from "./pages/VoteParty";
+import VoteSummary from "./pages/VoteSummary";
+import VoteSuccess from "./pages/VoteSuccess";
 
 function App() {
   return (
@@ -23,11 +26,14 @@ function App() {
           <Route path="*" element={<Homepage replace to="/homepage" />} />
           <Route path="/login" element={<UserLogin />} />
           <Route path="/selectUser" element={<SelectUser />} />
-          <Route path="/home" element={<UserHome />} />
+          <Route path="/userHome" element={<UserHome />} />
           <Route path="/adminLogin" element={<AdminLogin />} />
           <Route path="/adminHome" element={<AdminHome />} />
           <Route path="/adminSearch" element={<AdminSearch />} />
           <Route path="/voteResults" element={<VoteResults />} />
+          <Route path="/voteParty" element={<VoteParty />} />
+          <Route path="/voteSummary" element={<VoteSummary />} />
+          <Route path="/voteSuccess" element={<VoteSuccess />} />
         </Routes>
       </Router>
     </>

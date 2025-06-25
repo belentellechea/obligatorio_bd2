@@ -1,11 +1,13 @@
-export default function listComponent() {
+import "./ListComponent.css";
+
+export default function ListComponent({ imageUrl, title }) {
   return (
-    <div className="listContainer">
-      <div className="listImage">
-        <img src="./src/assets"></img>
+    <div className="listComponentContainer">
+      <div className="listImageContainer">
+        <img src={imageUrl} className="listImage"></img>
       </div>
-      <div>
-        <p className="listTitle"> Lista 2050</p>
+      <div className="titleContainer">
+        <p className="listTitle"> {title} </p>
       </div>
     </div>
   );

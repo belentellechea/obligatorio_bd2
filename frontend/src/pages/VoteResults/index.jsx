@@ -9,6 +9,7 @@ import {
   getReportePartidoCircuito,
 } from "../../services/reportesService";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const chartData = {
   labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
@@ -43,6 +44,7 @@ export default function VoteResults() {
   const [filter, setFilter] = useState("pais");
   const [inputValue, setInputValue] = useState("");
   const [idEleccion] = useState(localStorage.getItem("id_eleccion"));
+  const navigate = useNavigate();
 
   return (
     <div className="container VoteResults">
@@ -72,7 +74,12 @@ export default function VoteResults() {
           </div>
         </div>
       </div>
-      <button className="cancelButton VoteResults">Volver</button>
+      <button
+        className="cancelButton VoteResults"
+        onClick={() => navigate("/adminHome")}
+      >
+        Volver
+      </button>
     </div>
   );
 }
