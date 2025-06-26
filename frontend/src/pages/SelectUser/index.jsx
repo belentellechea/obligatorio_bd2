@@ -1,8 +1,13 @@
 import "./SelectUser.css";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function SelectUser() {
   const navigate = useNavigate(); 
+
+  // useEffect(() => {
+  //   localStorage.clear();
+  // }, []);
 
   const handleVotanteClick = () => {
     navigate("/login");
