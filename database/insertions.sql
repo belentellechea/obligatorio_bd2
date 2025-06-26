@@ -381,5 +381,3 @@ INSERT INTO MESA(numero_circuito, id_eleccion, CC_presidente, CC_secretario, CC_
 (2,1,'ZXC3219','BNM7612','QAZ9631'),
 (3,1,'ASD9870','YUI5623','WSX8520'),
 (4,1,'XCV0741','HJK7634','EDC7418');
-
-UPDATE USUARIO SET contrasenia=1234 WHERE CC_miembro_mesa='ASD9870'

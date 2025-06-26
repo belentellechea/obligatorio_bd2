@@ -23,7 +23,7 @@ export default function UserLogin() {
 
     if (data && !data.error) {
       localStorage.setItem("votante", JSON.stringify(data));
-      navigate("/home"); 
+      navigate("/voteParty"); 
     } else {
       alert("No se encontró un votante con esa credencial para esta elección");
     }
