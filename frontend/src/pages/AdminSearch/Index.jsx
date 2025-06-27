@@ -14,7 +14,7 @@ export default function AdminSearch() {
         </div>
       </div>
       <input className="searchPerson" placeholder="Ejemplo: ABC 1234  "></input>
-      <button className="cancelButton" onClick={() => navigate("/adminLogin")}>
+      <button className="cancelButton" onClick={() => navigate("/adminHome")}>
         Volver
       </button>
     </div>

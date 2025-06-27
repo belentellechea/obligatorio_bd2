@@ -18,6 +18,7 @@
   justify-content: space-between;
   align-items: flex-start;
   align-self: stretch;
+  height: 40px;
 }
 
 .person-image {
@@ -25,7 +26,10 @@
   height: 160px;
   border-radius: 100px;
   border: 1px solid #eaeaea;
-  background: grey;
+  background: rgb(80, 73, 73);
+  background-image: url(./src/assets/8964178665b732562a9cc847cc16c7649e51ee2c.jpg);
+  background-position: center;
+  background-size: 170px;
 }
 
 .container.personInfo {

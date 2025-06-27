@@ -1,6 +1,9 @@
 import "./PersonInfo.css";
+import { useNavigate } from "react-router-dom";
 
 export default function PersonInfo() {
+  const navigate = useNavigate();
+
   return (
     <div className="container personInfo">
       <h1>Información del votante</h1>
@@ -29,7 +32,12 @@ export default function PersonInfo() {
           </div>
         </div>
       </div>
-      <button id="closePersonInfoButton">Cerrar</button>
+      <button
+        id="closePersonInfoButton"
+        onClick={() => navigate("/adminSearch")}
+      >
+        Cerrar
+      </button>
     </div>
   );
 }

@@ -18,6 +18,7 @@ import VoteParty from "./pages/VoteParty";
 import VoteSummary from "./pages/VoteSummary";
 import VoteSuccess from "./pages/VoteSuccess";
 import PersonInfo from "./pages/PersonInfo";
+import VoteList from "./pages/VoteList";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/adminHome" element={<AdminHome />} />
           <Route path="/adminSearch" element={<AdminSearch />} />
           <Route path="/voteResults" element={<VoteResults />} />
+          <Route path="/voteList" element={<VoteList />} />
           <Route path="/voteParty" element={<VoteParty />} />
           <Route path="/voteSummary" element={<VoteSummary />} />
           <Route path="/voteSuccess" element={<VoteSuccess />} />
