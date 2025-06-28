@@ -1,4 +1,5 @@
 import ListComponent from "../../components/ListComponent";
+import ListContainer from "../../components/ListContainer";
 import "./VoteParty.css";
 import { useNavigate } from "react-router-dom";
 import { getPartidos } from "../../services/partidosService";
@@ -38,13 +39,7 @@ export default function VoteParty() {
     <div className="container VoteParty">
       <h1> Elige un partido </h1>
       <div className="partyList">
-        {partidos.length > 0 && partidos.map((partido, index) => (
-          <ListComponent
-            key={index}
-            title={partido.nombre}
-            imageUrl={partido.image}
-          />
-        ))}
+        <ListContainer data={data} />
       </div>
 
       <button className="cancelButton" 
