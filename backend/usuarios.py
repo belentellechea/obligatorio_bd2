@@ -27,9 +27,9 @@ def usuariosRoutes(app):
                 WHERE u.CC_miembro_mesa = %s AND u.contrasenia = %s
             """, (cc_miembro_mesa, contrasenia))
             usuario = cursor.fetchone()
-            print(usuario)
+          
             if usuario:
-                return jsonify({'message': 'Login exitoso', 'usuario': usuario}), 200
+                return jsonify(usuario), 200, {'Content-Type': 'application/json; charset=utf-8'}
             else:
                 return jsonify({'error': 'Credenciales inválidas'}), 401
         

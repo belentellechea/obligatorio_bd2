@@ -26,7 +26,7 @@ def votantesRoutes(app):
             if not votante:
                 return jsonify({"error":"Votante no encontrado"}), 404
             
-            return jsonify({"votante": votante}), 200
+            return jsonify({"votante": votante}), 200, {'Content-Type': 'application/json; charset=utf-8'}
         
         except Error as error: 
             return jsonify({"error": str(error)}), 500
