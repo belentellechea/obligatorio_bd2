@@ -1,15 +1,16 @@
-import ListComponent from "../../components/ListComponent";
 import ListContainer from "../../components/ListContainer";
 import "./VoteParty.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { getPartidos } from "../../services/partidosService";
 import { useState,useEffect } from "react";
 
 export default function VoteParty() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const {votante} = location.state || {};
   const [partidos, setPartidos] = useState([]); 
 
-   const imagenesPartidos = {
+  const imagenesPartidos = {
     "Frente Amplio": "./src/assets/partidos/Logo_Frente_Amplio.png",
     "Partido Nacional": "./src/assets/partidos/Flag_of_the_National_Party_(Uruguay).png",
     "Partido Colorado": "./src/assets/partidos/Flag_of_Colorado_Party_(Uruguay).png",
@@ -35,11 +36,24 @@ export default function VoteParty() {
     fetchPartidos();
   }, []);
 
+  if (!votante) {
+    return <p>No se encontraron los datos del votante.</p>;
+  }
+
+  const handlePartidoClick = (partido) => {
+    navigate("/voteList", {
+      state: {
+        votante,
+        partido
+      },
+    });
+  };
+
   return (
     <div className="container VoteParty">
       <h1> Elige un partido </h1>
       <div className="partyList">
-        <ListContainer data={data} />
+        <ListContainer data={partidos} onPartidoClick={handlePartidoClick}/>
       </div>
 
       <button className="cancelButton" 

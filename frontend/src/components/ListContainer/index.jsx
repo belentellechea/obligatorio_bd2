@@ -1,11 +1,15 @@
 import ListComponent from "../ListComponent";
 import "./ListContainer.css";
 
-export default function ListContainer({ data }) {
+export default function ListContainer({ data, onPartidoClick }) {
   return (
     <div className="listContainer">
       {data.map((element) => (
-        <ListComponent title={element.title} />
+        <ListComponent 
+          key={element.id}
+          title={element.nombre || element.numero} 
+          onClick={() => onPartidoClick(element)} 
+        />
       ))}
     </div>
   );
