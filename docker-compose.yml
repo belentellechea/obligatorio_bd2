@@ -43,8 +43,8 @@ services:
       - backend
     ports:
       - "5173:5173"
-    # environment:
-    #   VITE_API_URL: http://flask_backend:8080 # Interno en red Docker
+    #environment:
+    #  VITE_API_URL: http://flask_backend:8080 # Interno en red Docker
 
 volumes:
   db_data:

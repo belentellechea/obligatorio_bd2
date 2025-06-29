@@ -22,8 +22,7 @@ export default function UserLogin() {
     const data = await getVotante(cc, id_eleccion);
 
     if (data && !data.error) {
-      localStorage.setItem("votante", JSON.stringify(data));
-      navigate("/voteParty"); 
+      navigate("/userHome", { state: { votante: data.votante } });
     } else {
       alert("No se encontró un votante con esa credencial para esta elección");
     }

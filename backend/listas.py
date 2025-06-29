@@ -22,6 +22,7 @@ def listasRoutes(app):
             cursor = db.cursor(dictionary=True)
             cursor.execute("""
                 SELECT 
+                    l.id_papeleta AS id_papeleta,
                     l.numero AS numero_lista,
                     p.nombre AS nombre_persona,
                     p.apellido AS apellido_persona,
@@ -44,9 +45,12 @@ def listasRoutes(app):
             listas_dict = {}
             for fila in filas:
                 num_lista = fila["numero_lista"]
+                id_papeleta = fila["id_papeleta"]
+                 
                 if num_lista not in listas_dict:
                     listas_dict[num_lista] = {
                         "numero": num_lista,
+                        "id": id_papeleta,
                         "candidatos": []
                     }
                 listas_dict[num_lista]["candidatos"].append({

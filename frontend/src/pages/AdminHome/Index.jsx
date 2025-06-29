@@ -11,7 +11,7 @@ export default function AdminHome() {
     if (storedAdmin) {
       try {
         const adminData = JSON.parse(storedAdmin);
-        const { nombre, apellido } = adminData.usuario;
+        const { nombre, apellido } = adminData;
         setNombreCompleto(`${nombre} ${apellido}`);
       } catch (error) {
         console.error("Error al leer datos del admin en localStorage", error);
