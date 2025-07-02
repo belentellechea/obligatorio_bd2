@@ -25,6 +25,19 @@ ChartJS.register(
 
 export default function GraphComponent({ title, data }) {
   const [chartIndex, setChartIndex] = useState(1);
+  
+  if (!data || !data.labels || !data.datasets) {
+    return (
+      <div className="graphComponentContainer">
+        <div className="titleAndSettings">
+          <p className="graphTitle">{title}</p>
+        </div>
+        <p>Cargando gráfico...</p>
+      </div>
+    );
+  }
+
+
   return (
     <div className="graphComponentContainer">
       <div className="titleAndSettings">
@@ -56,3 +69,4 @@ export default function GraphComponent({ title, data }) {
     </div>
   );
 }
+
