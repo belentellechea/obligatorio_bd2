@@ -2,7 +2,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 
 export const getReporteListaPartidoPais = async (id_eleccion) => {
     try {
-        const response = await fetch(`${apiUrl}/listapartido/pais`, {
+        const response = await fetch(`${apiUrl}/reportes/listapartido/pais`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -18,7 +18,7 @@ export const getReporteListaPartidoPais = async (id_eleccion) => {
 
 export const getReportePartidoPais = async (id_eleccion) => {
     try {
-        const response = await fetch(`${apiUrl}/partido/pais`, {
+        const response = await fetch(`${apiUrl}/reportes/partido/pais`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -34,7 +34,7 @@ export const getReportePartidoPais = async (id_eleccion) => {
 
 export const getReporteListaPartidoDpto = async (nombre, id_eleccion) => {
     try {
-        const response = await fetch(`${apiUrl}/listapartido/departamento/${nombre}`, {
+        const response = await fetch(`${apiUrl}/reportes/listapartido/departamento/${nombre}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -50,7 +50,7 @@ export const getReporteListaPartidoDpto = async (nombre, id_eleccion) => {
 
 export const getReportePartidoDpto = async (nombre,id_eleccion) => {
     try {
-        const response = await fetch(`${apiUrl}/partido/departamento/${nombre}`, {
+        const response = await fetch(`${apiUrl}/reportes/partido/departamento/${nombre}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -66,7 +66,7 @@ export const getReportePartidoDpto = async (nombre,id_eleccion) => {
 
 export const getReporteListaPartidoCircuito = async (id_eleccion,id) => {
     try {
-        const response = await fetch(`${apiUrl}/listapartido/circuito/${id}`, {
+        const response = await fetch(`${apiUrl}/reportes/listapartido/circuito/${id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -82,7 +82,7 @@ export const getReporteListaPartidoCircuito = async (id_eleccion,id) => {
 
 export const getReportePartidoCircuito = async (id_eleccion,id) => {
     try {
-        const response = await fetch(`${apiUrl}/partido/circuito/${id}`, {
+        const response = await fetch(`${apiUrl}/reportes/partido/circuito/${id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
