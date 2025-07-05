@@ -11,32 +11,29 @@ import {
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const chartData = {
-  labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-  datasets: [
-    {
-      label: "# of Votes",
-      data: [12, 19, 3, 5, 2, 3],
-      backgroundColor: [
-        "rgba(255, 99, 132, 0.5)",
-        "rgba(54, 162, 235, 0.5)",
-        "rgba(255, 206, 86, 0.5)",
-        "rgba(75, 192, 192, 0.5)",
-        "rgba(153, 102, 255, 0.5)",
-        "rgba(255, 159, 64, 0.5)",
-      ],
-      borderColor: [
-        "rgba(255, 99, 132, 1)",
-        "rgba(54, 162, 235, 1)",
-        "rgba(255, 206, 86, 1)",
-        "rgba(75, 192, 192, 1)",
-        "rgba(153, 102, 255, 1)",
-        "rgba(255, 159, 64, 1)",
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
+function generateColors(count) {
+  const baseColors = [
+    "rgba(255, 99, 132, 0.5)",
+    "rgba(54, 162, 235, 0.5)",
+    "rgba(255, 206, 86, 0.5)",
+    "rgba(75, 192, 192, 0.5)",
+    "rgba(153, 102, 255, 0.5)",
+    "rgba(255, 159, 64, 0.5)",
+  ];
+  return Array.from({ length: count }, (_, i) => baseColors[i % baseColors.length]);
+}
+
+function formatLabel(label) {
+  if (label === "anulado") {
+    return "Anulado";
+  }
+  if (label === "valido_en_blanco") {
+    return "En blanco";
+  }
+  
+  return label;
+}
+
 
 export default function VoteResults() {
   const [chartDataLista, setChartDataLista] = useState(null);
@@ -46,6 +43,78 @@ export default function VoteResults() {
   const [idEleccion] = useState(localStorage.getItem("id_eleccion"));
   const navigate = useNavigate();
 
+  useEffect(() => {
+  async function fetchData() {
+    if (!idEleccion) return;
+
+    try {
+      let dataLista = null;
+      let dataPartido = null;
+
+      if (filter === "pais") {
+        dataLista = await getReporteListaPartidoPais(idEleccion);
+        dataPartido = await getReportePartidoPais(idEleccion);
+      } else if (filter === "departamento") {
+        dataLista = await getReporteListaPartidoDpto(inputValue, idEleccion);
+        dataPartido = await getReportePartidoDpto(inputValue, idEleccion);
+      } else if (filter === "circuito") {
+        // if (!inputValue.trim()) return;
+        dataLista = await getReporteListaPartidoCircuito(idEleccion, inputValue);
+        dataPartido = await getReportePartidoCircuito(idEleccion, inputValue);
+      }
+
+      const extractDataArray = (data) => {
+          if (!data) return null;
+          if (data.resultados_pais) return data.resultados_pais;
+          if (data.resultados_departamento) return data.resultados_departamento;
+          if (data.resultados_circuitos) return data.resultados_circuitos;
+          return data; 
+        };
+
+        const finalDataLista = extractDataArray(dataLista);
+        const finalDataPartido = extractDataArray(dataPartido);
+
+      if (finalDataLista && finalDataLista.length > 0) {
+        const listaLabels = finalDataLista.map((item) => formatLabel(item.lista));
+        const listaData = finalDataLista.map((item) => item.cantidad_votos);
+
+        setChartDataLista({
+          labels: listaLabels,
+          datasets: [
+            {
+              label: "# de votos",
+              data: listaData,
+              backgroundColor: generateColors(listaData.length),
+            },
+          ],
+        });
+      }
+
+      if (finalDataPartido && finalDataPartido.length > 0) {
+        const partidoLabels = finalDataPartido.map((item) => formatLabel(item.partido));
+        const partidoData = finalDataPartido.map((item) => item.cantidad_votos);
+
+        setChartDataPartido({
+          labels: partidoLabels,
+          datasets: [
+            {
+              label: "# de votos",
+              data: partidoData,
+              backgroundColor: generateColors(partidoData.length),
+            },
+          ],
+        });
+      }
+
+    } catch (err) {
+      console.log("Error al obtener datos de los reportes", err);
+    }
+  }
+
+  fetchData();
+}, [filter, inputValue, idEleccion]);
+
+
   return (
     <div className="container VoteResults">
       <div className="titleDashboard">
@@ -53,24 +122,39 @@ export default function VoteResults() {
         <div className="dashboard">
           <div className="inputAndFilter">
             <input
-              className="searchPerson VoteResults"
-              placeholder="Buscar por número de circuito"
-            ></input>
+                className="searchPerson VoteResults"
+                placeholder={`Buscar por ${filter}`}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                disabled={filter === "pais"}
+              />
             <div className="filterContainer">
               <p className="filterTitle">Filtrar por: </p>
               <div className="filterButtons">
-                <button className="filterResultButton Selected">
-                  {" "}
-                  Circuito{" "}
+                <button
+                  className={`filterResultButton ${filter === "circuito" ? "Selected" : ""}`}
+                  onClick={() => setFilter("circuito")}
+                >
+                  Circuito
                 </button>
-                <button className="filterResultButton"> Departamento </button>
-                <button className="filterResultButton"> Uruguay </button>
+                <button
+                  className={`filterResultButton ${filter === "departamento" ? "Selected" : ""}`}
+                  onClick={() => setFilter("departamento")}
+                >
+                  Departamento
+                </button>
+                <button
+                  className={`filterResultButton ${filter === "pais" ? "Selected" : ""}`}
+                  onClick={() => setFilter("pais")}
+                >
+                  Uruguay
+                  </button>
               </div>
             </div>
           </div>
           <div className="graphsContainer">
-            <GraphComponent title="Resultados por partido" data={chartData} />
-            <GraphComponent title="Resultados por lista" data={chartData} />
+            <GraphComponent title="Resultados por partido" data={chartDataPartido} />
+            <GraphComponent title="Resultados por lista" data={chartDataLista} />
           </div>
         </div>
       </div>

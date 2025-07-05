@@ -21,7 +21,7 @@ def reportesRoutes(app):
             
             cursor = db.cursor(dictionary=True)
             cursor.execute('SELECT * FROM resultados_pais_lista_partido WHERE id_eleccion=%s',(id_eleccion,))
-            resultados_pais = cursor.fetchone()
+            resultados_pais = cursor.fetchall()
             
             return jsonify({"resultados_pais": resultados_pais}), 200
         
@@ -49,7 +49,7 @@ def reportesRoutes(app):
             
             cursor = db.cursor(dictionary=True)
             cursor.execute('SELECT * FROM resultados_pais_partido WHERE id_eleccion=%s',(id_eleccion,))
-            resultados_pais = cursor.fetchone()
+            resultados_pais = cursor.fetchall()
             
             return jsonify({"resultados_pais": resultados_pais}), 200
         
@@ -79,7 +79,7 @@ def reportesRoutes(app):
             
             cursor = db.cursor(dictionary=True)
             cursor.execute('SELECT * FROM resultados_departamento_lista_partido WHERE id_eleccion=%s AND departamento=%s',(id_eleccion,nombre))
-            resultados_departamento = cursor.fetchone()
+            resultados_departamento = cursor.fetchall()
             
             if not resultados_departamento:
                 return jsonify({"error":"Departamento no encontrado"}), 404
@@ -110,7 +110,7 @@ def reportesRoutes(app):
             
             cursor = db.cursor(dictionary=True)
             cursor.execute('SELECT * FROM resultados_departamento_partido WHERE id_eleccion=%s AND departamento=%s',(id_eleccion,nombre))
-            resultados_departamento = cursor.fetchone()
+            resultados_departamento = cursor.fetchall()
             
             if not resultados_departamento:
                 return jsonify({"error":"Departamento no encontrado"}), 404
@@ -143,7 +143,8 @@ def reportesRoutes(app):
             
             cursor = db.cursor(dictionary=True)
             cursor.execute('SELECT * FROM resultados_circuito_lista_partido WHERE id_eleccion=%s AND circuito=%s',(id_eleccion,id))
-            resultados_circuito = cursor.fetchone()
+            resultados_circuito = cursor.fetchall()
+
             
             if not resultados_circuito:
                 return jsonify({"error":"Circuito no encontrado"}), 404
@@ -174,7 +175,7 @@ def reportesRoutes(app):
             
             cursor = db.cursor(dictionary=True)
             cursor.execute('SELECT * FROM resultados_circuito_partido WHERE id_eleccion=%s AND circuito=%s',(id_eleccion,id))
-            resultados_circuito = cursor.fetchone()
+            resultados_circuito = cursor.fetchall()
             
             if not resultados_circuito:
                 return jsonify({"error":"Circuito no encontrado"}), 404
