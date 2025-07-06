@@ -1,8 +1,8 @@
 import "./UserLogin.css";
+import { getVotante, verificarSiVoto } from "../../services/votantesService";
+import { eleccionActiva } from "../../utils/eleccionUtils";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getVotante } from "../../services/votantesService";
-import { eleccionActiva } from "../../utils/eleccionUtils";
 
 export default function UserLogin() {
   const [cc,setCc] = useState(""); 
@@ -17,6 +17,12 @@ export default function UserLogin() {
 
     if (!cc || !id_eleccion) {
       alert("Debe ingresar la credencial y tener una elección activa");
+      return;
+    }
+
+    const verificacion = await verificarSiVoto(cc, id_eleccion);
+    if (verificacion?.ya_voto) {
+      alert("Usted ya emitió su voto.");
       return;
     }
 
