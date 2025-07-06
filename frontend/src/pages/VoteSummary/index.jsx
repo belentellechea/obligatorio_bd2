@@ -106,6 +106,21 @@ export default function VoteSummary() {
               Presidente: {lista?.presidente || "N/D"}
               <br />
               Vicepresidente: {lista?.vicepresidente || "N/D"}
+              <br />
+              <span className="font-medium">Cámara de Senadores:</span>{" "}
+              {lista?.camaraSenadores?.length > 0
+                ? lista.camaraSenadores.join(", ")
+                : "N/D"}
+              <br />
+              <span className="font-medium">Cámara de Representantes:</span>{" "}
+              {lista?.camaraRepresentantes?.length > 0
+                ? lista.camaraRepresentantes.join(", ")
+                : "N/D"}
+              <br />
+              <span className="font-medium">Junta Electoral:</span>{" "}
+              {lista?.juntaElectoral?.length > 0
+                ? lista.juntaElectoral.join(", ")
+                : "N/D"}
             </p>
           </div>
         </div>

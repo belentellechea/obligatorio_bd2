@@ -1,21 +1,29 @@
 import "./PersonInfo.css";
+import { verificarSiVoto } from "../../services/votantesService";
+import { formatearFecha } from "../../utils/formatUtils";
+import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function PersonInfo() {
   const navigate = useNavigate();
   const location = useLocation();
   const {votante} = location.state || {};
+  const [yaVoto, setYaVoto] = useState(false);
+
+  useEffect(() => {
+    const fetchYaVoto = async () => {
+      if (votante?.credencial && localStorage.getItem("id_eleccion")) {
+        const idEleccion = localStorage.getItem("id_eleccion");
+        const result = await verificarSiVoto(votante.credencial, idEleccion);
+        setYaVoto(result?.ya_voto === true);
+      }
+    };
+    fetchYaVoto();
+  }, [votante]);
+
 
   if (!votante) {
     return <p>No se encontró la información del votante.</p>;
-  }
-
-  function formatearFecha(fechaString) {
-    const fecha = new Date(fechaString);
-    const dia = String(fecha.getDate()).padStart(2, '0');
-    const mes = String(fecha.getMonth() + 1).padStart(2, '0'); // Los meses van de 0 a 11
-    const año = fecha.getFullYear();
-    return `${dia}/${mes}/${año}`;
   }
 
   return (
@@ -48,6 +56,9 @@ export default function PersonInfo() {
             <p className="boldText">Numero de circuito esperado:</p>
             <p>{votante.numero_circuito_esperado}</p>
           </div>
+          {yaVoto && (
+              <p className="mensaje-ya-voto">⚠️ Este votante ya ha emitido su voto.</p>
+          )}
         </div>
       </div>
       <button

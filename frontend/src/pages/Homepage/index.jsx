@@ -21,19 +21,12 @@ export default function Homepage() {
     try {
       const data = await getEleccion({ tipo, fecha });
 
-      // para verificar que la votación halla empezado o terminado
-      const now = new Date();
-      const inicio = new Date(data.fecha_inicio);
-      const fin = new Date(data.fecha_fin);
-
-      if (now >= inicio && now <= fin) {
-        if (data && data.ID) {
-          localStorage.setItem("id_eleccion", data.ID);
-          localStorage.setItem("numero_circuito", numero);
-          navigate("/selectUser");
-        } else {
-          alert("No se encontró la elección para esos datos");
-        }
+      if (data && data.ID) {
+        localStorage.setItem("id_eleccion", data.ID);
+        localStorage.setItem("fecha_inicio", data.fecha_hora_inicio);
+        localStorage.setItem("fecha_fin", data.fecha_hora_fin);
+        localStorage.setItem("numero_circuito", numero);
+        navigate("/selectUser");
       } else {
         const mensaje =
           now < inicio
@@ -46,6 +39,30 @@ export default function Homepage() {
       alert("Ocurrió un error al buscar la elección");
     }
   };
+
+  // const handleStart = async () => {
+  //   console.log({ tipo, fecha, numero });
+  //   try {
+  //     const data = await getEleccion({ tipo, fecha });
+
+  //     if (data && data.ID) {
+  //       localStorage.setItem("id_eleccion", data.ID);
+  //       localStorage.setItem("fecha_inicio", data.fecha_hora_inicio);
+  //       localStorage.setItem("fecha_fin", data.fecha_hora_fin);
+  //       localStorage.setItem("numero_circuito", numero);
+  //       navigate("/selectUser");
+  //     } else {
+  //       const mensaje =
+  //         now < inicio
+  //           ? "La elección aún no ha comenzado"
+  //           : "La elección ya ha finalizado";
+  //       setModalMessage(mensaje);
+  //       setModalVisible(true);
+  //     }
+  //   } catch (error) {
+  //     alert("Ocurrió un error al buscar la elección");
+  //   }
+  // };
 
   return (
     <div className="homeContainer">

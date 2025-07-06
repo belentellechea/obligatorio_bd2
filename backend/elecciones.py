@@ -30,7 +30,7 @@ def eleccionesRoutes(app):
                 return jsonify({"error": "Tipo de elección inválido"}), 400
             
             cursor.execute(f"""
-                           SELECT e.ID 
+                           SELECT e.ID, e.fecha_hora_inicio, e.fecha_hora_fin 
                            FROM ELECCION e 
                            JOIN {tabla_tipo} t ON e.ID = t.id_eleccion 
                            WHERE DATE(e.fecha_hora_inicio) = %s""", (fecha,))
