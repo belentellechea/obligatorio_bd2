@@ -49,7 +49,9 @@ export default function UserLogin() {
         ></input>
         <div className="buttonsContainer UserLogin">
           <button className="cancelButton" onClick={handleCancel}>Cancelar</button>
-          <button onClick={handleNext} disabled={!eleccionActiva()}>Siguiente</button>
+          <button onClick={handleNext} 
+          // disabled={!eleccionActiva()}
+          >Siguiente</button>
         </div>
       </div>
     </div>

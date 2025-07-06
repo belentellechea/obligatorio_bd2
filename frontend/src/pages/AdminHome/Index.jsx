@@ -27,11 +27,15 @@ export default function AdminHome() {
         <h2> Elija una opción</h2>
       </div>
       <div className="buttonsContainer AdminHome">
-        <button className="voteButton" onClick={() => navigate("/adminSearch")} disabled={!eleccionActiva()}>
+        <button className="voteButton" onClick={() => navigate("/adminSearch")} 
+        // disabled={!eleccionActiva()}
+        >
           <img src="../src/assets/icons/data_loss_prevention.svg"></img>
           <t> Buscar votante</t>
         </button>
-        <button className="voteButton" onClick={() => navigate("/voteResults")} disabled={!eleccionFinalizada()}>
+        <button className="voteButton" onClick={() => navigate("/voteResults")} 
+        // disabled={!eleccionFinalizada()}
+        >
           <img src="../src/assets/icons/bar_chart.svg"></img>
           <t> Recuento de votos</t>
         </button>
