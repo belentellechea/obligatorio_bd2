@@ -36,7 +36,7 @@ export default function UserHome() {
       });
     } else {
       navigate("/voteSummary", {
-        state: { votante, tipoVoto: tipo },
+        state: { votante, tipoVoto: tipo, from: "/userHome" },
       });
     }
   };

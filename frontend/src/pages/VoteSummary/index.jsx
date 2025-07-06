@@ -5,7 +5,7 @@ import { postVoto } from "../../services/votosService";
 export default function VoteSummary() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { votante, tipoVoto, lista, partido } = location.state || {};
+  const { votante, tipoVoto, lista, partido, from } = location.state || {};
 
   const esVotoEspecial =
     tipoVoto === "valido_en_blanco" || tipoVoto === "anulado";
@@ -127,7 +127,15 @@ export default function VoteSummary() {
       )}
 
       <div className="buttonsContainer">
-        <button className="cancelButton" onClick={() => navigate(-1)}>
+        <button className="cancelButton" 
+          onClick={() => 
+            navigate(from, {
+              state: {
+                votante,
+                ...(from === "/voteList" && { partido }),
+              },
+            })
+          }>
           Cancelar
         </button>
         <button onClick={handleConfirmarVoto}>Siguiente</button>

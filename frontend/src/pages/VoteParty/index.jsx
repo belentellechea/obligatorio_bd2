@@ -90,8 +90,7 @@ export default function VoteParty() {
       <button
         className="cancelButton"
         onClick={() => {
-          localStorage.removeItem("votante");
-          navigate("/userHome");
+          navigate("/userHome", {state: {votante}});
         }}
       >
         {" "}
