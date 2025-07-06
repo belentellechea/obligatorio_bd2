@@ -21,7 +21,9 @@ export default function Homepage() {
 
       if (data && data.ID) {
         localStorage.setItem("id_eleccion", data.ID);
-        localStorage.setItem("numero_circuito",numero)
+        localStorage.setItem("fecha_inicio", data.fecha_hora_inicio);
+        localStorage.setItem("fecha_fin", data.fecha_hora_fin);
+        localStorage.setItem("numero_circuito",numero);
         navigate("/selectUser");
       } else {
         alert("No se encontró la elección para esos datos");
