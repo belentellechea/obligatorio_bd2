@@ -1,10 +1,12 @@
 import "./AdminSearch.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { getVotante } from "../../services/votantesService";
 import { useState } from "react";
 
 export default function AdminSearch() {
   const navigate = useNavigate();
+  const location = useLocation(); 
+  const { admin } = location.state || {};
   const [cc, setCc] = useState("");
 
   const handleSearch = async () => {
@@ -16,7 +18,7 @@ export default function AdminSearch() {
     const response = await getVotante(cc.trim(), id_eleccion);
 
     if (response?.votante) {
-      navigate("/personInfo", {state: {votante: response.votante}});
+      navigate("/personInfo", {state: {votante: response.votante, admin : admin}});
     } else {
       alert("Votante no encontrado.");
     }
@@ -38,7 +40,7 @@ export default function AdminSearch() {
         onChange={(e)=>setCc(e.target.value)}
         ></input>
       <div className="buttonsContainer AdminLogin">
-        <button className="cancelButton" onClick={() => navigate("/adminHome")}>
+        <button className="cancelButton" onClick={() => navigate("/adminHome", { state: { admin: admin}})}>
           Volver
         </button>
         <button className="nextButton"

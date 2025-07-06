@@ -7,7 +7,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 export default function PersonInfo() {
   const navigate = useNavigate();
   const location = useLocation();
-  const {votante} = location.state || {};
+  const {votante, admin} = location.state || {};
   const [yaVoto, setYaVoto] = useState(false);
 
   useEffect(() => {
@@ -63,7 +63,7 @@ export default function PersonInfo() {
       </div>
       <button
         id="closePersonInfoButton"
-        onClick={() => navigate("/adminSearch")}
+        onClick={() => navigate("/adminSearch", { state: { admin : admin}})}
       >
         Cerrar
       </button>

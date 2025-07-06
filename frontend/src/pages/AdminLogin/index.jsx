@@ -16,8 +16,7 @@ export default function AdminLogin() {
       });
 
       if (data && !data.error) {
-        localStorage.setItem("admin", JSON.stringify(data));
-        navigate("/adminHome"); 
+        navigate("/adminHome",{ state : { admin : data } } );
       } else {
         alert("Credenciales incorrectas o usuario no encontrado");
       }
@@ -60,9 +59,6 @@ export default function AdminLogin() {
         </form>
         <div className="buttonsContainer AdminLogin">
           <button className="cancelButton" onClick={handleCancel}>Volver</button>
-          {/* <button disabled className="disabledButton">
-            Siguiente
-          </button> */}
           <button
             className="nextButton"
             onClick={handleSubmit}

@@ -64,7 +64,7 @@ export default function VoteList() {
           });
         }}
       />
-      <button className="cancelButton" onClick={() => navigate("/voteParty")}>
+      <button className="cancelButton" onClick={() => navigate("/voteParty", { state: { votante : votante }})}>
         Volver
       </button>
     </div>
