@@ -1,4 +1,4 @@
-# Obligatorio Bases de Datos II - 2024
+# Obligatorio Bases de Datos II - 2025
 Proyecto realizado en el marco de la materia Bases de Datos II correspondiente al quinto semestre de la carrera de Ingenieria en Informática perteneciente a la Universidad Católica del Uruguay (UCU). 
 Se desarrolló un sistema de votación electrónica para la Corte Electoral de la República Oriental del Uruguay, contando con perfiles de: votante (para ingresar un voto), y administrador, para poder buscar un votante y ver el recuento de votos luego de finalizada la etapa de votación. 
 
