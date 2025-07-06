@@ -2,6 +2,7 @@ import "./UserLogin.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getVotante } from "../../services/votantesService";
+import { eleccionActiva } from "../../utils/eleccionUtils";
 
 export default function UserLogin() {
   const [cc,setCc] = useState(""); 
@@ -48,7 +49,7 @@ export default function UserLogin() {
         ></input>
         <div className="buttonsContainer UserLogin">
           <button className="cancelButton" onClick={handleCancel}>Cancelar</button>
-          <button onClick={handleNext}>Siguiente</button>
+          <button onClick={handleNext} disabled={!eleccionActiva()}>Siguiente</button>
         </div>
       </div>
     </div>
