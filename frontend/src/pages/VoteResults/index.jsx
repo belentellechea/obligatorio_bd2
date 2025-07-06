@@ -10,7 +10,7 @@ import {
 } from "../../services/reportesService";
 import { generateColors, formatLabel } from "../../utils/formatUtils";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function VoteResults() {
   const [chartDataLista, setChartDataLista] = useState(null);
@@ -19,6 +19,8 @@ export default function VoteResults() {
   const [inputValue, setInputValue] = useState("");
   const [idEleccion] = useState(localStorage.getItem("id_eleccion"));
   const navigate = useNavigate();
+  const location = useLocation(); 
+  const {admin} = location.state || {};
 
   useEffect(() => {
   async function fetchData() {
@@ -137,7 +139,7 @@ export default function VoteResults() {
       </div>
       <button
         className="cancelButton VoteResults"
-        onClick={() => navigate("/adminHome")}
+        onClick={() => navigate("/adminHome", { state: { admin : admin }})}
       >
         Volver
       </button>
