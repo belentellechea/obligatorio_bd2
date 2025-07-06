@@ -4,10 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { getEleccion } from "../../services/eleccionesService";
 
 export default function Homepage() {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [numero, setNumero] = useState("");
   const [tipo, setTipo] = useState("presidencial");
-  const [fecha, setFecha] = useState(""); 
+  const [fecha, setFecha] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   const handleChange = (e) => {
     const soloNumeros = e.target.value.replace(/[^0-9]/g, "");
@@ -15,16 +17,30 @@ export default function Homepage() {
   };
 
   const handleStart = async () => {
-    console.log({tipo,fecha,numero})
+    console.log({ tipo, fecha, numero });
     try {
-      const data = await getEleccion({tipo,fecha}); 
+      const data = await getEleccion({ tipo, fecha });
 
-      if (data && data.ID) {
-        localStorage.setItem("id_eleccion", data.ID);
-        localStorage.setItem("numero_circuito",numero)
-        navigate("/selectUser");
+      // para verificar que la votación halla empezado o terminado
+      const now = new Date();
+      const inicio = new Date(data.fecha_inicio);
+      const fin = new Date(data.fecha_fin);
+
+      if (now >= inicio && now <= fin) {
+        if (data && data.ID) {
+          localStorage.setItem("id_eleccion", data.ID);
+          localStorage.setItem("numero_circuito", numero);
+          navigate("/selectUser");
+        } else {
+          alert("No se encontró la elección para esos datos");
+        }
       } else {
-        alert("No se encontró la elección para esos datos");
+        const mensaje =
+          now < inicio
+            ? "La elección aún no ha comenzado"
+            : "La elección ya ha finalizado";
+        setModalMessage(mensaje);
+        setModalVisible(true);
       }
     } catch (error) {
       alert("Ocurrió un error al buscar la elección");
@@ -53,21 +69,32 @@ export default function Homepage() {
           <div className="select-tipoFecha">
             <div className="select">
               <label className="labelCircuito"> Tipo de elección</label>
-              <select name="cars" id="cars" className="select-tipoEleccion" 
-              value={tipo} onChange={(e)=>setTipo(e.target.value)}>
+              <select
+                name="cars"
+                id="cars"
+                className="select-tipoEleccion"
+                value={tipo}
+                onChange={(e) => setTipo(e.target.value)}
+              >
                 <option value="presidencial">Presidencial</option>
                 <option value="municipal">Municipal</option>
                 <option value="ballotage">Ballotage</option>
-                <option value="referendum/plebiscito">Plebiscito/Referéndum</option>
+                <option value="referendum/plebiscito">
+                  Plebiscito/Referéndum
+                </option>
               </select>
             </div>
             <div className="select">
               <label className="labelCircuito"> Fecha</label>
-              <input type="date" value={fecha} onChange={(e)=>setFecha(e.target.value)}></input>
+              <input
+                type="date"
+                value={fecha}
+                onChange={(e) => setFecha(e.target.value)}
+              ></input>
             </div>
           </div>
           <div className="buscarCircuitoInput">
-            <label for="buscarCircuito" className="labelCircuito">
+            <label htmlFor="buscarCircuito" className="labelCircuito">
               Número del circuito
             </label>
             <input
@@ -78,11 +105,18 @@ export default function Homepage() {
             ></input>
           </div>
         </div>
-        <button
-          onClick={handleStart}
-        >
-          Comenzar
-        </button>
+        <button onClick={handleStart}>Comenzar</button>
+
+        {modalVisible && (
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <img src="./src/assets/icons/warning.svg"></img>
+              <h1>Error</h1>
+              <p>{modalMessage}</p>
+              <button onClick={() => setModalVisible(false)}> cerrar </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

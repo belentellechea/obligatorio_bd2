@@ -44,10 +44,31 @@ export default function VoteParty() {
     fetchPartidos();
   }, []);
 
-  if (loading) return <div className="container">Cargando</div>;
+  if (loading)
+    return (
+      <div className="container Loading">
+        <div className="loader"></div>
+        <p>Cargando</p>
+      </div>
+    );
 
   if (!votante) {
-    return <p>No se encontraron los datos del votante.</p>;
+    return (
+      <div className="container errorUser">
+        <div className="errorInfo">
+          <img src="./src/assets/icons/sadFace.svg"></img>
+          <h1>Error</h1>
+          <p>No se encontraron los datos del votante.</p>
+        </div>
+        <button
+          onClick={() => {
+            navigate("/login");
+          }}
+        >
+          Volver a inicio
+        </button>
+      </div>
+    );
   }
 
   const handlePartidoClick = (partido) => {
@@ -70,7 +91,7 @@ export default function VoteParty() {
         className="cancelButton"
         onClick={() => {
           localStorage.removeItem("votante");
-          navigate("/login");
+          navigate("/userHome");
         }}
       >
         {" "}

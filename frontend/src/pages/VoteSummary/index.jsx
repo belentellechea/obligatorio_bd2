@@ -4,10 +4,11 @@ import { postVoto } from "../../services/votosService";
 
 export default function VoteSummary() {
   const location = useLocation();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const { votante, tipoVoto, lista, partido } = location.state || {};
 
-  const esVotoEspecial = tipoVoto === "valido_en_blanco" || tipoVoto === "anulado";
+  const esVotoEspecial =
+    tipoVoto === "valido_en_blanco" || tipoVoto === "anulado";
 
   const handleConfirmarVoto = async () => {
     try {
@@ -55,11 +56,39 @@ export default function VoteSummary() {
 
       {esVotoEspecial ? (
         <div className="voteInfo">
-          <p>
-            Tipo de voto: <strong>
-              {tipoVoto === "valido_en_blanco" ? "EN BLANCO" : "ANULADO"}
-            </strong>
-          </p>
+          <div className="animatedEnvelopeContainer">
+            <div class="letter-image">
+              <div class="animated-mail">
+                <div class="back-fold"></div>
+                <div class="letter">
+                  <div class="letter-border"></div>
+                  <div class="letter-title">
+                    <p>
+                      {tipoVoto === "valido_en_blanco"
+                        ? "Voto en blanco"
+                        : "Voto anulado"}
+                    </p>
+                  </div>
+                  <div class="letter-context"></div>
+                  <div class="letter-stamp">
+                    <div class="letter-stamp-inner"></div>
+                  </div>
+                </div>
+                <div class="top-fold"></div>
+                <div class="envelopeBody"></div>
+                <div class="left-fold"></div>
+              </div>
+              <div class="shadow"></div>
+            </div>
+          </div>
+          <div className="votoEspecialTexto">
+            <p>
+              Tipo de voto:{" "}
+              <strong>
+                {tipoVoto === "valido_en_blanco" ? "EN BLANCO" : "ANULADO"}
+              </strong>
+            </p>
+          </div>
         </div>
       ) : (
         <div className="datosContainer">
@@ -83,7 +112,9 @@ export default function VoteSummary() {
       )}
 
       <div className="buttonsContainer">
-        <button className="cancelButton" onClick={() => navigate(-1)}>Cancelar</button>
+        <button className="cancelButton" onClick={() => navigate(-1)}>
+          Cancelar
+        </button>
         <button onClick={handleConfirmarVoto}>Siguiente</button>
       </div>
     </div>
