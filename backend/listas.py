@@ -35,10 +35,11 @@ def listasRoutes(app):
                 JOIN CANDIDATO c ON cl.cc_candidato = c.CC_persona AND cl.anio = c.anio
                 JOIN PERSONA p ON c.CC_persona = p.CC
                 JOIN PARTIDO_POLITICO pp ON l.partido = pp.nombre
-                WHERE pp.ID = %s AND ep.id_eleccion = %s AND cl.organo IN ('presidencia', 'vicepresidencia')
-                ORDER BY l.numero, cl.organo
+                WHERE pp.ID = %s AND ep.id_eleccion = %s 
+                ORDER BY l.numero, cl.organo, cl.orden
             """, (id_partido, id_eleccion))
             filas = cursor.fetchall()
+
             if not filas:
                 return jsonify({"error": "No se encontraron listas"}), 404
 
@@ -46,19 +47,30 @@ def listasRoutes(app):
             for fila in filas:
                 num_lista = fila["numero_lista"]
                 id_papeleta = fila["id_papeleta"]
-                 
+                organo = fila["organo"]
+                nombre_completo = f"{fila['nombre_persona']} {fila['apellido_persona']}"
+
                 if num_lista not in listas_dict:
                     listas_dict[num_lista] = {
                         "numero": num_lista,
                         "id": id_papeleta,
-                        "candidatos": []
+                        "presidente": None, 
+                        "vicepresidente": None, 
+                        "camaraSenadores": [],
+                        "camaraRepresentantes": [],
+                        "juntaElectoral": []
                     }
-                listas_dict[num_lista]["candidatos"].append({
-                    "cc": fila["cc_persona"],
-                    "nombre": fila["nombre_persona"],
-                    "apellido": fila["apellido_persona"],
-                    "organo": fila["organo"]
-                })
+
+                if organo == 'presidencia':
+                    listas_dict[num_lista]["presidente"] = nombre_completo
+                elif organo == 'vicepresidencia':
+                    listas_dict[num_lista]["vicepresidente"] = nombre_completo
+                elif organo == 'camara_senadores':
+                    listas_dict[num_lista]["camaraSenadores"].append(nombre_completo)
+                elif organo == 'camara_representantes':
+                    listas_dict[num_lista]["camaraRepresentantes"].append(nombre_completo)
+                elif organo == 'junta_electoral':
+                    listas_dict[num_lista]["juntaElectoral"].append(nombre_completo)
 
             return jsonify({"listas": list(listas_dict.values())}), 200
         

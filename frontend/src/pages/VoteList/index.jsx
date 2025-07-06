@@ -1,7 +1,7 @@
 import ListContainer from "../../components/ListContainer";
 import "./VoteList.css";
-import { useNavigate, useLocation } from "react-router-dom";
 import { getListaPorPartido } from "../../services/listasService";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 export default function VoteList() {
@@ -23,18 +23,23 @@ export default function VoteList() {
       try {
         const data = await getListaPorPartido(partido.id, id_eleccion);
         const listasConImagen = data.listas.map((lista) => {
-        const presidente = lista.candidatos.find(c => c.organo === "presidencia");
-        const vicepresidente = lista.candidatos.find(c => c.organo === "vicepresidencia");
+        const camaraSenadores = lista.camaraSenadores || [];
+        const camaraRepresentantes = lista.camaraRepresentantes || [];
+        const juntaElectoral = lista.juntaElectoral || [];
 
-        return {
-          id: lista.id,
-          numero: lista.numero,
-          presidente: presidente ? `${presidente.nombre} ${presidente.apellido}` : "N/D",
-          vicepresidente: vicepresidente ? `${vicepresidente.nombre} ${vicepresidente.apellido}` : "N/D",
-          image: "./src/assets/listas/default.png"
-        };
-      });
-      setListas(listasConImagen);
+          return {
+            id: lista.id,
+            numero: lista.numero,
+            presidente: lista.presidente || "N/D",
+            vicepresidente: lista.vicepresidente || "N/D",
+            camaraSenadores: camaraSenadores, 
+            camaraRepresentantes: camaraRepresentantes, 
+            juntaElectoral: juntaElectoral, 
+            image: "./src/assets/listas/default.png" 
+          };
+        });
+
+        setListas(listasConImagen);
       } catch (error) {
         console.error("Error al cargar listas:", error);
       }
