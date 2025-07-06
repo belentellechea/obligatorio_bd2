@@ -1,6 +1,6 @@
 import "./ListComponent.css";
 
-export default function ListComponent({ imageUrl, title, onClick }) {
+export default function ListComponent({ imageUrl, title, onClick, image }) {
   return (
     <div className="listComponentContainer" onClick={onClick}>
       <div className="listImageContainer">

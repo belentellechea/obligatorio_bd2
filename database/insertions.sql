@@ -167,8 +167,8 @@ INSERT INTO PERSONA(CC, CI, nombre, apellido, fecha_nacimiento) VALUES
 ('KLM4578','43728190','María','Fernández','1995-09-15'),
 ('XYZ1234','41872345','Luis','Martínez','1992-06-22'),
 ('PQR9845','40918276','Ana','López','2000-01-10'),
-('DEF3456','39817264','Carlos','Pérez','1988-12-30'),
-('LMN4567','42718345','Lucía','Rodríguez','1999-07-05'),
+('DEF3456','39817264','Carlos','Pérez','1988-12-30'), -- Ya votó
+('LMN4567','42718345','Lucía','Rodríguez','1999-07-05'), -- Ya votó
 ('GHI6789','41729384','Pedro','Gómez','1957-03-18'),
 ('UVW2345','43819273','Sofía','Díaz','1994-11-02'),
 ('JKL9876','42638471','Diego','Sánchez','1996-08-26'),
@@ -177,7 +177,7 @@ INSERT INTO PERSONA(CC, CI, nombre, apellido, fecha_nacimiento) VALUES
 ('TUV4321','40729183','Camila','Ruiz','1990-09-09'),
 ('QWE6781','43628471','Mateo','Silva','2001-04-20'),
 ('ZXC3219','41473829','Florencia','Méndez','1989-07-14'),
-('ASD9870','42938472','Tomás','Cabrera','1998-02-27'),
+('ASD9870','42938472','Tomás','Cabrera','1998-02-27'), -- Ya votó
 ('FGH3452','43728472','Julieta','Morales','1997-06-06'),
 ('BNM7612','41827462','Martín','Vega','1965-03-30'),
 ('YUI5623','42387193','Paula','Ortega','1992-12-19'),
@@ -192,15 +192,15 @@ INSERT INTO PERSONA(CC, CI, nombre, apellido, fecha_nacimiento) VALUES
 ('UJM3074','41729385','Catalina','Sosa','1995-10-05'),
 ('IKL2963','41572938','Andrés','Rivas','1992-12-09'),
 ('OLP1652','41938471','Mía','Leal','1968-06-14'),
-('XCV0741','40817294','Gonzalo','Iglesias','2000-02-25'),
+('XCV0741','40817294','Gonzalo','Iglesias','2000-02-25'), -- Ya votó
 ('MLK5823','40192847','Valentina','Correa','1997-01-19'),
-('ZXC4712','42381746','Agustín','Ramos','1975-04-22'),
+('ZXC4712','42381746','Agustín','Ramos','1975-04-22'), -- Ya votó
 ('BNM3601','43629184','Isabella','Silva','1963-09-30'),
-('POI2490','41482739','Tomás','Cabrera','1990-12-15'),
+('POI2490','41482739','Tomás','Cabrera','1990-12-15'), -- Ya votó
 ('LKJ1388','40739481','Camila','Ferrer','1952-08-08'),
 ('BMC1234', '47432109', 'Yamandú', 'Orsi',   '1960-02-07'),
-('ACJ5678', '37451268', 'Carolina', 'Cosse', '1962-10-25'),
-('FHI4321', '40123456', 'Álvaro', 'Delgado', '1969-04-16'),
+('ACJ5678', '37451268', 'Carolina', 'Cosse', '1962-10-25'), -- Ya votó
+('FHI4321', '40123456', 'Álvaro', 'Delgado', '1969-04-16'), -- Ya votó
 ('BME8765', '43125678', 'Valeria', 'Ripoll',  '1970-04-21'),
 ('CMM2345', '41345678', 'Andrés', 'Ojeda',    '1970-03-15'),
 ('SFU6789', '42987654', 'Robert', 'Silva',    '1971-05-10'),

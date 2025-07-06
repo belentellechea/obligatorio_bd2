@@ -59,7 +59,8 @@ export default function VoteList() {
               votante,
               lista: listaSeleccionada,
               partido,
-              tipoVoto: "valido_simple"
+              tipoVoto: "valido_simple",
+              from: "/voteList"
             }
           });
         }}

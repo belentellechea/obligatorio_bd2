@@ -2,7 +2,17 @@ from flask import jsonify, request
 from db import get_db_connection
 from mysql.connector import Error 
 import json 
+from decimal import Decimal
 
+def convert_decimals(obj):
+    """
+    Convierte todos los valores Decimal en floats dentro de listas o diccionarios.
+    """
+    if isinstance(obj, list):
+        return [convert_decimals(item) for item in obj]
+    elif isinstance(obj, dict):
+        return {k: float(v) if isinstance(v, Decimal) else v for k, v in obj.items()}
+    return obj
 
 def reportesRoutes(app): 
     
@@ -23,7 +33,8 @@ def reportesRoutes(app):
             cursor.execute('SELECT * FROM resultados_pais_lista_partido WHERE id_eleccion=%s',(id_eleccion,))
             resultados_pais = cursor.fetchall()
             
-            return jsonify({"resultados_pais": resultados_pais}), 200
+            # return jsonify({"resultados_pais": resultados_pais}), 200
+            return jsonify({"resultados_pais": convert_decimals(resultados_pais)}), 200
         
         except Error as error: 
             return jsonify({"error": str(error)}), 500
@@ -51,7 +62,8 @@ def reportesRoutes(app):
             cursor.execute('SELECT * FROM resultados_pais_partido WHERE id_eleccion=%s',(id_eleccion,))
             resultados_pais = cursor.fetchall()
             
-            return jsonify({"resultados_pais": resultados_pais}), 200
+            # return jsonify({"resultados_pais": resultados_pais}), 200
+            return jsonify({"resultados_pais": convert_decimals(resultados_pais)}), 200
         
         except Error as error: 
             return jsonify({"error": str(error)}), 500
@@ -84,7 +96,8 @@ def reportesRoutes(app):
             if not resultados_departamento:
                 return jsonify({"error":"Departamento no encontrado"}), 404
             
-            return jsonify({"resultados_departamento": resultados_departamento}), 200
+            # return jsonify({"resultados_departamento": resultados_departamento}), 200
+            return jsonify({"resultados_departamento": convert_decimals(resultados_departamento)}), 200
         
         except Error as error: 
             return jsonify({"error": str(error)}), 500
@@ -115,7 +128,8 @@ def reportesRoutes(app):
             if not resultados_departamento:
                 return jsonify({"error":"Departamento no encontrado"}), 404
             
-            return jsonify({"resultados_departamento": resultados_departamento}), 200
+            # return jsonify({"resultados_departamento": resultados_departamento}), 200
+            return jsonify({"resultados_departamento": convert_decimals(resultados_departamento)}), 200
         
         except Error as error: 
             return jsonify({"error": str(error)}), 500
@@ -149,7 +163,8 @@ def reportesRoutes(app):
             if not resultados_circuito:
                 return jsonify({"error":"Circuito no encontrado"}), 404
             
-            return jsonify({"resultados_circuitos": resultados_circuito}), 200
+            # return jsonify({"resultados_circuitos": resultados_circuito}), 200
+            return jsonify({"resultados_circuitos": convert_decimals(resultados_circuito)}), 200
         
         except Error as error: 
             return jsonify({"error": str(error)}), 500
@@ -180,7 +195,8 @@ def reportesRoutes(app):
             if not resultados_circuito:
                 return jsonify({"error":"Circuito no encontrado"}), 404
             
-            return jsonify({"resultados_circuitos": resultados_circuito}), 200
+            # return jsonify({"resultados_circuitos": resultados_circuito}), 200
+            return jsonify({"resultados_circuitos": convert_decimals(resultados_circuito)}), 200
         
         except Error as error: 
             return jsonify({"error": str(error)}), 500
