@@ -21,6 +21,12 @@
   height: 40px;
 }
 
+.person-info-container.observado {
+  p {
+    color: rgb(255, 42, 42);
+  }
+}
+
 .person-image {
   width: 160px;
   height: 160px;
@@ -47,4 +53,10 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+}
+
+.mensajeYaVotoContainer {
+  background-color: #fff8d6ec;
+  padding: 0px 32px;
+  border-radius: 32px;
 }

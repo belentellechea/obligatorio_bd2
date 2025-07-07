@@ -33,6 +33,7 @@ export default function GraphComponent({ title, data, ganadores, errorMsg }) {
           <p className="graphTitle">{title}</p>
         </div>
         <div className="errorMessage">
+          <img src="./src/assets/icons/sadFace.svg"></img>
           <p>{errorMsg}</p>
         </div>
       </div>

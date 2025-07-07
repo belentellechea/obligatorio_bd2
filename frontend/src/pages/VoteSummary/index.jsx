@@ -141,35 +141,39 @@ export default function VoteSummary() {
               <p />
               Vicepresidente: {lista?.vicepresidente || "N/D"}
               <p />
-              <span>Cámara de Senadores:</span>{" "}
-              {lista?.camaraSenadores?.length > 0
-                ? lista.camaraSenadores.join(", ")
-                : "N/D"}
-              <p />
-              <span>Cámara de Representantes:</span>{" "}
-              {lista?.camaraRepresentantes?.length > 0
-                ? lista.camaraRepresentantes.join(", ")
-                : "N/D"}
-              <p />
-              <span>Junta Electoral:</span>{" "}
-              {lista?.juntaElectoral?.length > 0
-                ? lista.juntaElectoral.join(", ")
-                : "N/D"}
+              <div className="infoSecundaria">
+                <span>Cámara de Senadores:</span>{" "}
+                {lista?.camaraSenadores?.length > 0
+                  ? lista.camaraSenadores.join(", ")
+                  : "N/D"}
+                <p />
+                <span>Cámara de Representantes:</span>{" "}
+                {lista?.camaraRepresentantes?.length > 0
+                  ? lista.camaraRepresentantes.join(", ")
+                  : "N/D"}
+                <p />
+                <span>Junta Electoral:</span>{" "}
+                {lista?.juntaElectoral?.length > 0
+                  ? lista.juntaElectoral.join(", ")
+                  : "N/D"}
+              </div>
             </p>
           </div>
         </div>
       )}
 
       <div className="buttonsContainer">
-        <button className="cancelButton" 
-          onClick={() => 
+        <button
+          className="cancelButton"
+          onClick={() =>
             navigate(from, {
               state: {
                 votante,
                 ...(from === "/voteList" && { partido }),
               },
             })
-          }>
+          }
+        >
           Cancelar
         </button>
         <button onClick={handleConfirmarVoto}>Siguiente</button>
