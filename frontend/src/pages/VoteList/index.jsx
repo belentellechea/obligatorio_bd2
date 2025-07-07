@@ -6,11 +6,11 @@ import { useState, useEffect } from "react";
 
 export default function VoteList() {
   const navigate = useNavigate();
-  const location = useLocation(); 
-  const {votante,partido} = location.state || {};
+  const location = useLocation();
+  const { votante, partido } = location.state || {};
   const [listas, setListas] = useState([]);
 
-  if (!votante || !partido) return <p>Datos incompletos</p>
+  if (!votante || !partido) return <p>Datos incompletos</p>;
 
   useEffect(() => {
     const fetchListas = async () => {
@@ -23,19 +23,19 @@ export default function VoteList() {
       try {
         const data = await getListaPorPartido(partido.id, id_eleccion);
         const listasConImagen = data.listas.map((lista) => {
-        const camaraSenadores = lista.camaraSenadores || [];
-        const camaraRepresentantes = lista.camaraRepresentantes || [];
-        const juntaElectoral = lista.juntaElectoral || [];
+          const camaraSenadores = lista.camaraSenadores || [];
+          const camaraRepresentantes = lista.camaraRepresentantes || [];
+          const juntaElectoral = lista.juntaElectoral || [];
 
           return {
             id: lista.id,
             numero: lista.numero,
             presidente: lista.presidente || "N/D",
             vicepresidente: lista.vicepresidente || "N/D",
-            camaraSenadores: camaraSenadores, 
-            camaraRepresentantes: camaraRepresentantes, 
-            juntaElectoral: juntaElectoral, 
-            image: "./src/assets/listas/default.png" 
+            camaraSenadores: camaraSenadores,
+            camaraRepresentantes: camaraRepresentantes,
+            juntaElectoral: juntaElectoral,
+            image: "./src/assets/listas/default.png",
           };
         });
 
@@ -51,20 +51,23 @@ export default function VoteList() {
   return (
     <div className="container">
       <h1> Elija una lista</h1>
-      <ListContainer 
-        data={listas} 
+      <ListContainer
+        data={listas}
         onPartidoClick={(listaSeleccionada) => {
           navigate("/voteSummary", {
             state: {
               votante,
               lista: listaSeleccionada,
               partido,
-              tipoVoto: "valido_simple"
-            }
+              tipoVoto: "valido_simple",
+            },
           });
         }}
       />
-      <button className="cancelButton" onClick={() => navigate("/voteParty", { state: { votante : votante }})}>
+      <button
+        className="cancelButton"
+        onClick={() => navigate("/voteParty", { state: { votante: votante } })}
+      >
         Volver
       </button>
     </div>

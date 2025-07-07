@@ -14,7 +14,7 @@
 .listImageContainer {
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 120px;
   align-items: center;
   background-color: rgb(123, 150, 216);
 }
