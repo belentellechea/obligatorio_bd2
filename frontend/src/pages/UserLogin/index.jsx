@@ -13,6 +13,12 @@ export default function UserLogin() {
   }
 
   const handleNext = async () => {
+
+    // if (!eleccionActiva()) {
+    //   alert("La elección no está activa. No se puede continuar.");
+    //   return; 
+    // }
+
     const id_eleccion = localStorage.getItem("id_eleccion");
 
     if (!cc || !id_eleccion) {
@@ -29,6 +35,14 @@ export default function UserLogin() {
     const data = await getVotante(cc, id_eleccion);
 
     if (data && !data.error) {
+      const circuitoActual = localStorage.getItem("numero_circuito");
+      const circuitoEsperado = data.votante.numero_circuito_esperado;
+
+      if (parseInt(circuitoActual) !== circuitoEsperado) {
+        alert(
+          `Atención: usted se encuentra registrado en el circuito ${circuitoEsperado}, pero está votando en el circuito ${circuitoActual}. El voto será observado.`
+        );
+      }
       navigate("/userHome", { state: { votante: data.votante } });
     } else {
       alert("No se encontró un votante con esa credencial para esta elección");
