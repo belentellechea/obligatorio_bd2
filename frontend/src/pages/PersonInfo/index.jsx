@@ -7,8 +7,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 export default function PersonInfo() {
   const navigate = useNavigate();
   const location = useLocation();
-  const {votante, admin} = location.state || {};
+  const { votante, admin } = location.state || {};
   const [yaVoto, setYaVoto] = useState(false);
+  const [votoObservado, setVotoObservado] = useState(false);
 
   useEffect(() => {
     const fetchYaVoto = async () => {
@@ -16,11 +17,15 @@ export default function PersonInfo() {
         const idEleccion = localStorage.getItem("id_eleccion");
         const result = await verificarSiVoto(votante.credencial, idEleccion);
         setYaVoto(result?.ya_voto === true);
+
+        const circuitoReal = localStorage.getItem("numero_circuito");
+        const circuitoEsperado = votante.numero_circuito_esperado;
+
+        setVotoObservado(circuitoReal !== circuitoEsperado.toString());
       }
     };
     fetchYaVoto();
   }, [votante]);
-
 
   if (!votante) {
     return <p>No se encontró la información del votante.</p>;
@@ -52,18 +57,27 @@ export default function PersonInfo() {
             <p className="boldText">Fecha de nacimiento:</p>
             <p>{formatearFecha(votante.fecha_nacimiento)}</p>
           </div>
-          <div className="person-info-container">
+          <div
+            className={`person-info-container ${
+              votoObservado ? "observado" : ""
+            }`}
+          >
             <p className="boldText">Numero de circuito esperado:</p>
             <p>{votante.numero_circuito_esperado}</p>
           </div>
-          {yaVoto && (
-              <p className="mensaje-ya-voto">⚠️ Este votante ya ha emitido su voto.</p>
-          )}
         </div>
       </div>
+
+      {yaVoto && (
+        <div className="mensajeYaVotoContainer">
+          <p className="mensaje-ya-voto">
+            ⚠️ Este votante ya ha emitido su voto.
+          </p>
+        </div>
+      )}
       <button
         id="closePersonInfoButton"
-        onClick={() => navigate("/adminSearch", { state: { admin : admin}})}
+        onClick={() => navigate("/adminSearch", { state: { admin: admin } })}
       >
         Cerrar
       </button>

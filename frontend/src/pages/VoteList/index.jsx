@@ -9,6 +9,7 @@ export default function VoteList() {
   const location = useLocation();
   const { votante, partido } = location.state || {};
   const [listas, setListas] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   if (!votante || !partido) return <p>Datos incompletos</p>;
 
@@ -17,6 +18,7 @@ export default function VoteList() {
       const id_eleccion = localStorage.getItem("id_eleccion");
       if (!id_eleccion || !partido?.id) {
         console.error("Faltan datos para obtener listas");
+        setLoading(false);
         return;
       }
 
@@ -35,13 +37,15 @@ export default function VoteList() {
             camaraSenadores: camaraSenadores,
             camaraRepresentantes: camaraRepresentantes,
             juntaElectoral: juntaElectoral,
-            image: "./src/assets/listas/default.png",
+            image: "./src/assets/list/default.png",
           };
         });
 
         setListas(listasConImagen);
       } catch (error) {
         console.error("Error al cargar listas:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -49,22 +53,29 @@ export default function VoteList() {
   }, [partido]);
 
   return (
-    <div className="container">
+    <div className="container voteList">
       <h1> Elija una lista</h1>
-      <ListContainer
-        data={listas}
-        onPartidoClick={(listaSeleccionada) => {
-          navigate("/voteSummary", {
-            state: {
-              votante,
-              lista: listaSeleccionada,
-              partido,
-              tipoVoto: "valido_simple",
-              from: "/voteList",
-            },
-          });
-        }}
-      />
+      {loading ? (
+        <div className="loaderContainer">
+          <div className="loader"></div>
+          <p>Cargando listas...</p>
+        </div>
+      ) : (
+        <ListContainer
+          data={listas}
+          onPartidoClick={(listaSeleccionada) => {
+            navigate("/voteSummary", {
+              state: {
+                votante,
+                lista: listaSeleccionada,
+                partido,
+                tipoVoto: "valido_simple",
+                from: "/voteList",
+              },
+            });
+          }}
+        />
+      )}
       <button
         className="cancelButton"
         onClick={() => navigate("/voteParty", { state: { votante: votante } })}
