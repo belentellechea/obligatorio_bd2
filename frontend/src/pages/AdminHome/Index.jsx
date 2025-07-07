@@ -20,6 +20,22 @@ export default function AdminHome() {
     }
   }, []);
 
+  const handleBuscarVotanteClick = () => {
+    // if (eleccionActiva()) {
+      navigate("/adminSearch", { state: { admin: admin } });
+    // } else {
+    //   alert("La elección no está activa. No se puede buscar votantes.");
+    // }
+  };
+
+  const handleRecuentoVotosClick = () => {
+    // if (eleccionFinalizada()) {
+      navigate("/voteResults", { state: { admin: admin } });
+    // } else {
+    //   alert("La elección aún no ha finalizado. No se puede ver el recuento de votos.");
+    // }
+  };
+
   return (
     <div className="container">
       <div className="titleContainer">
@@ -27,13 +43,13 @@ export default function AdminHome() {
         <h2> Elija una opción</h2>
       </div>
       <div className="buttonsContainer AdminHome">
-        <button className="voteButton" onClick={() => navigate("/adminSearch", { state : { admin : admin }})} 
+        <button className="voteButton" onClick={handleBuscarVotanteClick}
         // disabled={!eleccionActiva()}
         >
           <img src="../src/assets/icons/data_loss_prevention.svg"></img>
           <t> Buscar votante</t>
         </button>
-        <button className="voteButton" onClick={() => navigate("/voteResults", { state: { admin : admin }})} 
+        <button className="voteButton" onClick={handleRecuentoVotosClick}
         // disabled={!eleccionFinalizada()}
         >
           <img src="../src/assets/icons/bar_chart.svg"></img>

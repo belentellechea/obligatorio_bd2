@@ -13,6 +13,12 @@ export default function UserLogin() {
   }
 
   const handleNext = async () => {
+
+    // if (!eleccionActiva()) {
+    //   alert("La elección no está activa. No se puede continuar.");
+    //   return; 
+    // }
+
     const id_eleccion = localStorage.getItem("id_eleccion");
 
     if (!cc || !id_eleccion) {
