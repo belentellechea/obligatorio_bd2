@@ -7,8 +7,21 @@ export default function VoteSummary() {
   const navigate = useNavigate();
   const { votante, tipoVoto, lista, partido, from } = location.state || {};
 
+  const imagenesPartidos = {
+    "Frente Amplio": "./src/assets/partidos/Logo_Frente_Amplio.png",
+    "Partido Nacional":
+      "./src/assets/partidos/Flag_of_the_National_Party_(Uruguay).png",
+    "Partido Colorado":
+      "./src/assets/partidos/Flag_of_Colorado_Party_(Uruguay).png",
+    "Cabildo Abierto":
+      "./src/assets/partidos/Partido_cabildo_abierto_270x180_flag_version.jpg",
+  };
+
   const esVotoEspecial =
     tipoVoto === "valido_en_blanco" || tipoVoto === "anulado";
+
+  const logoPartido =
+    imagenesPartidos[partido?.nombre] || "./src/assets/partidos/default.png";
 
   const handleConfirmarVoto = async () => {
     try {
@@ -92,32 +105,53 @@ export default function VoteSummary() {
         </div>
       ) : (
         <div className="datosContainer">
-          <div className="image">
-            <img
-              src={lista?.image || "./src/assets/listas/default.png"}
-              alt="Imagen de la lista"
-            />
+          <div className="animatedEnvelopeContainer">
+            <div class="letter-image">
+              <div class="animated-mail">
+                <div class="back-fold"></div>
+                <div class="letter">
+                  <div class="letter-border"></div>
+                  <div class="letter-title">
+                    <p>Lista {lista?.numero}</p>
+                  </div>
+                  <div class="letter-context">
+                    <p>{partido?.nombre}</p>
+                  </div>
+                  <div class="partyImageEnvelopeContainer">
+                    <img
+                      src={logoPartido}
+                      alt="Logo del partido"
+                      className="partyImageEnvelope"
+                    />
+                  </div>
+                </div>
+                <div class="top-fold"></div>
+                <div class="envelopeBody"></div>
+                <div class="left-fold"></div>
+              </div>
+              <div class="shadow"></div>
+            </div>
           </div>
           <div className="voteInfo">
-            <p>Lista {lista?.numero}</p>
-            <p>{partido?.nombre}</p>
+            <h3>Lista {lista?.numero}</h3>
+            <h4>{partido?.nombre}</h4>
             <p>
-              <br />
+              <p />
               Presidente: {lista?.presidente || "N/D"}
-              <br />
+              <p />
               Vicepresidente: {lista?.vicepresidente || "N/D"}
-              <br />
-              <span className="font-medium">Cámara de Senadores:</span>{" "}
+              <p />
+              <span>Cámara de Senadores:</span>{" "}
               {lista?.camaraSenadores?.length > 0
                 ? lista.camaraSenadores.join(", ")
                 : "N/D"}
-              <br />
-              <span className="font-medium">Cámara de Representantes:</span>{" "}
+              <p />
+              <span>Cámara de Representantes:</span>{" "}
               {lista?.camaraRepresentantes?.length > 0
                 ? lista.camaraRepresentantes.join(", ")
                 : "N/D"}
-              <br />
-              <span className="font-medium">Junta Electoral:</span>{" "}
+              <p />
+              <span>Junta Electoral:</span>{" "}
               {lista?.juntaElectoral?.length > 0
                 ? lista.juntaElectoral.join(", ")
                 : "N/D"}
