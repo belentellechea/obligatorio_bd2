@@ -60,6 +60,7 @@ export default function VoteList() {
               lista: listaSeleccionada,
               partido,
               tipoVoto: "valido_simple",
+              from: "/voteList",
             },
           });
         }}
